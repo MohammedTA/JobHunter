@@ -9,6 +9,7 @@ import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { HomeComponent } from './components/home/home.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { FetchDataComponent } from './components/fetch-data/fetch-data.component';
+import { VacancyListComponent } from './components/vacancy-list/vacancy-list.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FetchDataComponent } from './components/fetch-data/fetch-data.component
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
-    FetchDataComponent
+    FetchDataComponent,
+    VacancyListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -26,6 +28,8 @@ import { FetchDataComponent } from './components/fetch-data/fetch-data.component
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
+      { path: 'jobs', component: VacancyListComponent },
+      { path: 'jobs/:id', component: VacancyListComponent },
     ])
   ],
   providers: [],
