@@ -21,10 +21,10 @@ export class VacancyListComponent implements OnInit {
       this.vacancies = result;
     }, error => console.error(error));
     this.vacancies=[
-    {id:1, title:'vacancy1',description:'dfdfdfdfdf', date:new Date().toLocaleDateString(),companyTitle:'SoftServe', vacancyCity:'Lviv', vacancyType:'hot', logo:''},
-    {id:1, title:'vacancy1',description:'dfdfdfdfdf', date:new Date().toLocaleDateString(), companyTitle:'HoneyCombSoft', vacancyCity:'Rivne', vacancyType:'hot',logo:''},
-    {id:1, title:'vacancy1',description:'dfdfdfdfdf', date:new Date().toLocaleDateString(), companyTitle:'AB Games', vacancyCity:'Rivne', vacancyType:'hot',logo:''},
-    {id:1, title:'vacancy1',description:'dfdfdfdfdf', date:new Date().toLocaleDateString(), companyTitle:'Wargaming', vacancyCity:'Kyiv', vacancyType:'hot',logo:''}
+    {id:1, title:'vacancy1',description:'dfdfdfdfdf', date:new Date().toLocaleDateString(),companyTitle:'SoftServe', vacancyCity:'Lviv', vacancyType:'hot', logo:'', vacancyCost:''},
+      { id: 1, title: 'vacancy1', description: 'dfdfdfdfdf', date: new Date().toLocaleDateString(), companyTitle: 'HoneyCombSoft', vacancyCity: 'Rivne', vacancyType: 'hot', logo: '', vacancyCost: '500'},
+      { id: 1, title: 'vacancy1', description: 'dfdfdfdfdf', date: new Date().toLocaleDateString(), companyTitle: 'AB Games', vacancyCity: 'Rivne', vacancyType: 'hot', logo: '', vacancyCost: '100'},
+      { id: 1, title: 'vacancy1', description: 'dfdfdfdfdf', date: new Date().toLocaleDateString(), companyTitle: 'Wargaming', vacancyCity: 'Kyiv', vacancyType: 'hot', logo: '', vacancyCost: '300'}
   ]
   }
   private ToggleFiltersVisibility(){

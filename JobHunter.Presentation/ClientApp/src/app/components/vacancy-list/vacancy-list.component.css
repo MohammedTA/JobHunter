@@ -1,4 +1,4 @@
-div .date-wrapper{
+div .date-wrapper, .image-wrapper{
     display: flex;
     justify-content: flex-end;
 }
@@ -25,4 +25,15 @@ div .vacancy-type{
     background-color:goldenrod;
     border-radius: 15%;
     padding: 5px;
+}
+
+.cost{
+  margin-left:20px;
+}
+  .cost::after {
+    content: "$";
+  }
+img .logo{
+  height:80px;
+  max-width:160px;
 }

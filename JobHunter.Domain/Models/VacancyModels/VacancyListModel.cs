@@ -10,6 +10,7 @@
         public string VacancyType { get; set; }
         public string VacancyCity { get; set; }
         public string CompanyTitle { get; set; }
+        public string VacancyCost { get; set; }
 
     }
 }

@@ -19,7 +19,8 @@ namespace JobHunter.Domain.Services
                 CompanyLogo="",
                 VacancyCity="Rivne",
                 VacancyType="hot",
-                CompanyTitle="SoftServe"
+                CompanyTitle="SoftServe",
+                VacancyCost="1200"
             },
              new VacancyListModel
             {
@@ -30,7 +31,8 @@ namespace JobHunter.Domain.Services
                 CompanyLogo="",
                 VacancyCity="Rivne",
                 VacancyType="ordinary",
-                CompanyTitle="SoftServe"
+                CompanyTitle="SoftServe",
+                VacancyCost="800"
             },
               new VacancyListModel
             {
@@ -52,7 +54,8 @@ namespace JobHunter.Domain.Services
                 CompanyLogo="",
                 VacancyCity="Kyiv",
                 VacancyType="ordinary",
-                CompanyTitle="Bodo"
+                CompanyTitle="Bodo",
+                VacancyCost="600"
             },
                      new VacancyListModel
             {
@@ -63,7 +66,8 @@ namespace JobHunter.Domain.Services
                 CompanyLogo="",
                 VacancyCity="Kyiv",
                 VacancyType="ordinary",
-                CompanyTitle="Bodo"
+                CompanyTitle="Bodo",
+                VacancyCost="500"
             },
                        new VacancyListModel
             {

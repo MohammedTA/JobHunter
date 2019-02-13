@@ -23,10 +23,11 @@
       <div class="col-md-8 col-sm-8">
         <div class="card" *ngFor="let vacancy of vacancies">
           <div class="card-header">
-            <h3> {{vacancy.title}} </h3>
+            <h3> {{vacancy.title}} <span class="cost" *ngIf="vacancy.vacancyCost">{{vacancy.vacancyCost}}</span></h3>
           </div>
            <div class="card-body">
-              <div class="details-wrapper">
+             <div class="row">
+              <div class="details-wrapper col-md-6">
                 <div>
                   <span>{{vacancy.companyTitle}}</span>
                 </div>
@@ -34,9 +35,13 @@
                     <span>{{vacancy.vacancyCity}}</span>
                   </div>
                   <div >
-                       <!-- <span *ngIf vacancy.vacancyType class="vacancy-type">{{vacancy.vacancyType}}</span> -->
+                       <span *ngIf="vacancy.vacancyType==='hot'" class="vacancy-type">{{vacancy.vacancyType}}</span>
                     </div>
                 </div>
+              <div class="image-wrapper col-md-6">
+                <img class="logo" src="#" alt="Company logo" />
+              </div>
+               </div>
             <p class="card-text">{{vacancy.description}}</p>
             <div class="date-wrapper"> <span>{{vacancy.date}}</span> </div>
           </div>

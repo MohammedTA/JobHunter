@@ -6,7 +6,8 @@ export interface VacancyListModel {
     logo:string;
     companyTitle:string;
     vacancyType:string;
-    vacancyCity:string;
+    vacancyCity: string;
+  vacancyCost: string;
   }
   export interface FilterModel{
     query:string;

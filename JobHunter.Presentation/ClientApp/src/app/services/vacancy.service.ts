@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class VacancyService {
-  VACANCIES_API=this.baseUrl+'api/Vacancies/GetVacancies';
+  VACANCIES_API=this.baseUrl+'api/Vacancy/GetVacancies';
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }
 
   getVacancies(params: FilterModel){
