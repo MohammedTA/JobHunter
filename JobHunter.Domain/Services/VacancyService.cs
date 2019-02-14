@@ -1,13 +1,17 @@
 ﻿using JobHunter.Domain.Interfaces;
+using JobHunter.Domain.Models.PaginationModels;
 using JobHunter.Domain.Models.VacancyFiltersModels;
 using JobHunter.Domain.Models.VacancyModels;
 using System.Collections.Generic;
+using System.Linq;
 
 
 namespace JobHunter.Domain.Services
 {
     public class VacancyService : IVacancyService
     {
+        private const string BASELOGOURL = "https://localhost:44365/Images/CompanyLogos/logo.png";
+        private const string ABGAMESLOGOURL = "https://localhost:44365/Images/CompanyLogos/ABGameslogo.png";
         private static readonly VacancyListModel[] vacancies = new VacancyListModel[]
         {
             new VacancyListModel
@@ -16,9 +20,10 @@ namespace JobHunter.Domain.Services
                 Title=".NET developer",
                 Description="the best vacancy",
                 Date="11.02.2019",
-                CompanyLogo="",
+                CompanyLogo=BASELOGOURL,
+                IsHot=true,
+                IsVip=false,
                 VacancyCity="Rivne",
-                VacancyType="hot",
                 CompanyTitle="SoftServe",
                 VacancyCost="1200"
             },
@@ -28,9 +33,10 @@ namespace JobHunter.Domain.Services
                 Title="JS developer",
                 Description="the best vacancy",
                 Date="1.02.2019",
-                CompanyLogo="",
+                CompanyLogo=BASELOGOURL,
                 VacancyCity="Rivne",
-                VacancyType="ordinary",
+                IsHot=true,
+                IsVip=false,
                 CompanyTitle="SoftServe",
                 VacancyCost="800"
             },
@@ -40,9 +46,10 @@ namespace JobHunter.Domain.Services
                 Title="Unity3D Game developer",
                 Description="the best vacancy",
                 Date="10.02.2019",
-                CompanyLogo="",
+                CompanyLogo=ABGAMESLOGOURL,
                 VacancyCity="Rivne",
-                VacancyType="ordinary",
+                IsHot=false,
+                IsVip=false,
                 CompanyTitle="AB Games"
             },
                new VacancyListModel
@@ -51,9 +58,10 @@ namespace JobHunter.Domain.Services
                 Title="New business manager",
                 Description="the best vacancy",
                 Date="10.02.2019",
-                CompanyLogo="",
+                CompanyLogo=BASELOGOURL,
+                IsHot=true,
+                IsVip=false,
                 VacancyCity="Kyiv",
-                VacancyType="ordinary",
                 CompanyTitle="Bodo",
                 VacancyCost="600"
             },
@@ -63,9 +71,10 @@ namespace JobHunter.Domain.Services
                 Title="New business manager",
                 Description="the best vacancy",
                 Date="10.01.2019",
-                CompanyLogo="",
+                CompanyLogo=BASELOGOURL,
                 VacancyCity="Kyiv",
-                VacancyType="ordinary",
+                 IsHot=false,
+                IsVip=false,
                 CompanyTitle="Bodo",
                 VacancyCost="500"
             },
@@ -75,9 +84,10 @@ namespace JobHunter.Domain.Services
                 Title="New business manager",
                 Description="the best vacancy",
                 Date="11.01.2019",
-                CompanyLogo="",
+                CompanyLogo=BASELOGOURL,
                 VacancyCity="Kyiv",
-                VacancyType="ordinary",
+                IsHot=false,
+                IsVip=false,
                 CompanyTitle="Sabo"
             },
                     new VacancyListModel
@@ -86,16 +96,36 @@ namespace JobHunter.Domain.Services
                 Title="New business manager",
                 Description="the best vacancy",
                 Date="17.01.2019",
-                CompanyLogo="",
+                CompanyLogo=BASELOGOURL,
                 VacancyCity="Kyiv",
-                VacancyType="ordinary",
+                IsHot=false,
+                IsVip=false,
                 CompanyTitle="Sabo"
-            }, 
+            },
         };
+
+        public PaginationOutPutModel<VacancyListModel> GetPaginationOutputList(PaginationModel paginationModel)
+        {
+            var amount = vacancies.Count();
+            var pageinfo = new Helpers.PageInfo
+            {
+                CurrentPage = paginationModel.CurrentPage,
+                ItemsPerPage = paginationModel.PageSize,
+                TotalItems = amount
+            };
+            var result=vacancies.OrderBy(p => p.Id).Skip((paginationModel.CurrentPage - 1) * paginationModel.PageSize)
+                .Take(paginationModel.PageSize);
+            var paginatedmodel = new PaginationOutPutModel<VacancyListModel>()
+            {
+                PageInfo = pageinfo,
+                PaginatedList = result.ToList()
+            };
+            return paginatedmodel;
+        }
 
         public IEnumerable<VacancyListModel> GetVacancies(FilterModel filterModel)
         {
-            return vacancies;
-        }
+            return vacancies.OrderByDescending(x=>x.IsHot);
+        }  
     }
 }

@@ -5,7 +5,8 @@ export interface VacancyListModel {
     date:string;
     logo:string;
     companyTitle:string;
-    vacancyType:string;
+    isHot: boolean;
+    isVip: boolean;
     vacancyCity: string;
   vacancyCost: string;
   }
@@ -41,4 +42,18 @@ export interface VacancyListModel {
   export interface Visa{
     on:boolean;
     off:boolean;
+}
+export interface PageInfo {
+  totalItems: number;
+  itemsPerPage: number;
+  currentPage: number;
+  totalPages: number;
+}
+export interface PaginatedVacancyList {
+  paginatedList: VacancyListModel[];
+  pageInfo: PageInfo;
+}
+export interface PageModel {
+  currentPage: number;
+  pageSize: number;
 }

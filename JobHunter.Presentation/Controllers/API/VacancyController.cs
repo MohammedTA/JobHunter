@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using JobHunter.Domain.Interfaces;
 using JobHunter.Domain.Models.VacancyFiltersModels;
+using JobHunter.Domain.Models.PaginationModels;
 using JobHunter.Domain.Models.VacancyModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +30,11 @@ namespace JobHunter.Presentation.Controllers.API
                 return BadRequest();
             }
             return Ok(_vacancyService.GetVacancies(filters));
+        }
+        [HttpGet("[action]")]
+        public IActionResult GetVacanciesList([FromQuery]PaginationModel paginationModel)
+        {
+            return Ok(_vacancyService.GetPaginationOutputList(paginationModel));
         }
 
     }

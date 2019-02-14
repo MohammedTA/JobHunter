@@ -21,7 +21,7 @@ div .details-wrapper{
     justify-content: space-between;
 }
 
-div .vacancy-type{
+div .vacancy-hot{
     background-color:goldenrod;
     border-radius: 15%;
     padding: 5px;
@@ -33,7 +33,8 @@ div .vacancy-type{
   .cost::after {
     content: "$";
   }
-img .logo{
-  height:80px;
+div .image-wrapper>img{
+  height:40px;
+  width:auto;
   max-width:160px;
 }

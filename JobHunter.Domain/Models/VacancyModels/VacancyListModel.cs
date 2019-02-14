@@ -7,7 +7,8 @@
         public string Description { get; set; }
         public string Date { get; set; }
         public string CompanyLogo { get; set; }
-        public string VacancyType { get; set; }
+        public  bool IsHot { get; set; }
+        public bool IsVip { get; set; }
         public string VacancyCity { get; set; }
         public string CompanyTitle { get; set; }
         public string VacancyCost { get; set; }
