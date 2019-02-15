@@ -12,6 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AspNetCore.Identity.EntityFrameworkCore.Simple" Version="2.0.2" />
+    <PackageReference Include="IdentityUserRoleManagement" Version="1.0.0" />
+    <PackageReference Include="MetroOAuth" Version="1.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.1" />
   </ItemGroup>
 
