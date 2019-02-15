@@ -32,7 +32,7 @@ namespace JobHunter.Presentation.Controllers.API
             return Ok(_vacancyService.GetVacancies(filters));
         }
         [HttpGet("[action]")]
-        public IActionResult GetVacanciesList([FromQuery]PaginationModel paginationModel)
+        public IActionResult GetVacanciesList([FromQuery]PaginationParamsModel paginationModel)
         {
             return Ok(_vacancyService.GetPaginationOutputList(paginationModel));
         }

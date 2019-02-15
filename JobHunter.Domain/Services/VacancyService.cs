@@ -102,9 +102,97 @@ namespace JobHunter.Domain.Services
                 IsVip=false,
                 CompanyTitle="Sabo"
             },
+                     new VacancyListModel
+            {
+                Id=8,
+                Title=".NET developer",
+                Description="the best vacancy",
+                Date="11.02.2019",
+                CompanyLogo=BASELOGOURL,
+                IsHot=true,
+                IsVip=false,
+                VacancyCity="Rivne",
+                CompanyTitle="SoftServe",
+                VacancyCost="1200"
+            },
+             new VacancyListModel
+            {
+                Id=9,
+                Title="JS developer",
+                Description="the best vacancy",
+                Date="1.02.2019",
+                CompanyLogo=BASELOGOURL,
+                VacancyCity="Rivne",
+                IsHot=true,
+                IsVip=false,
+                CompanyTitle="SoftServe",
+                VacancyCost="800"
+            },
+              new VacancyListModel
+            {
+                Id=10,
+                Title="Unity3D Game developer",
+                Description="the best vacancy",
+                Date="10.02.2019",
+                CompanyLogo=ABGAMESLOGOURL,
+                VacancyCity="Rivne",
+                IsHot=false,
+                IsVip=false,
+                CompanyTitle="AB Games"
+            },
+               new VacancyListModel
+            {
+                Id=11,
+                Title="New business manager",
+                Description="the best vacancy",
+                Date="10.02.2019",
+                CompanyLogo=BASELOGOURL,
+                IsHot=true,
+                IsVip=false,
+                VacancyCity="Kyiv",
+                CompanyTitle="Bodo",
+                VacancyCost="600"
+            },
+                     new VacancyListModel
+            {
+                Id=12,
+                Title="New business manager",
+                Description="the best vacancy",
+                Date="10.01.2019",
+                CompanyLogo=BASELOGOURL,
+                VacancyCity="Kyiv",
+                 IsHot=false,
+                IsVip=false,
+                CompanyTitle="Bodo",
+                VacancyCost="500"
+            },
+                       new VacancyListModel
+            {
+                Id=13,
+                Title="New business manager",
+                Description="the best vacancy",
+                Date="11.01.2019",
+                CompanyLogo=BASELOGOURL,
+                VacancyCity="Kyiv",
+                IsHot=false,
+                IsVip=false,
+                CompanyTitle="Sabo"
+            },
+                    new VacancyListModel
+            {
+                Id=14,
+                Title="New business manager",
+                Description="the best vacancy",
+                Date="17.01.2019",
+                CompanyLogo=BASELOGOURL,
+                VacancyCity="Kyiv",
+                IsHot=false,
+                IsVip=false,
+                CompanyTitle="Sabo"
+            },
         };
 
-        public PaginationOutPutModel<VacancyListModel> GetPaginationOutputList(PaginationModel paginationModel)
+        public PaginationOutPutModel<VacancyListModel> GetPaginationOutputList(PaginationParamsModel paginationModel)
         {
             var amount = vacancies.Count();
             var pageinfo = new Helpers.PageInfo

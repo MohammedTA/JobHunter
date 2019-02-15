@@ -46,23 +46,25 @@
             <div class="date-wrapper"> <span>{{vacancy.date}}</span> </div>
           </div>
         </div>
-        <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
-          <li [ngClass]="{disabled:pager.currentPage === 1}">
-              <a (click)="setPage(1)">First</a>
+        <nav>
+        <ul *ngIf="pager.pages && pager.pages.length" class="pagination  justify-content-center">
+          <li [ngClass]="{disabled:pager.currentPage === 1}"  class="page-item">
+              <a class="page-link" (click)="setPage(1)">First</a>
           </li>
-          <li [ngClass]="{disabled:pager.currentPage === 1}">
-              <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+          <li [ngClass]="{disabled:pager.currentPage === 1}"  class="page-item">
+              <a class="page-link" (click)="setPage(pager.currentPage - 1)">Previous</a>
           </li>
-          <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-              <a (click)="setPage(page)">{{page}}</a>
+          <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item">
+              <a class="page-link" (click)="setPage(page)">{{page}}</a>
           </li>
-          <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-              <a (click)="setPage(pager.currentPage + 1)">Next</a>
+          <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item">
+              <a class="page-link" (click)="setPage(pager.currentPage + 1)">Next</a>
           </li>
-          <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-              <a (click)="setPage(pager.totalPages)">Last</a>
+          <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}"  class="page-item">
+              <a class="page-link" (click)="setPage(pager.totalPages)">Last</a>
           </li>
       </ul>
+    </nav>
       </div>
       <div class="col-md-4 col-sm-8">
         <form *ngIf='isFiltersVisible'>

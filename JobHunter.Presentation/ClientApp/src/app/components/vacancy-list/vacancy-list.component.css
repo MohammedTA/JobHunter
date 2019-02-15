@@ -6,7 +6,9 @@ div .date-wrapper, .image-wrapper{
 div .card{
     width: 100%;
 }
-
+div .card:last-of-type{
+  margin-bottom: 30px;
+}
 div .card:hover{
     border: 1px solid #abb2ba;
 }
