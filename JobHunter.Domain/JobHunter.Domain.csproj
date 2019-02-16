@@ -9,9 +9,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
     <Folder Include="Models\" />
-    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="TestSSProject.Domain.csproj" />
   </ItemGroup>
 
 </Project>
