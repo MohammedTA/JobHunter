@@ -16,18 +16,19 @@ body {
 #login-box {
   position: relative;
   margin: 5% auto;
-  width: 600px;
-  height: 400px;
+  width: 450px;
+  height: 350px;
   background: white;
-  border-radius: 3px;
+  border-radius: 2px;
   box-shadow: 0 3px 4px rgb(0, 0, 0);
 }
 
 .left {
   position: absolute;
+
   top: 0;
-  margin-bottom: 40px;
-  left: 25%;
+  margin-bottom: 5px;
+  left: 12.5%;
   box-sizing: border-box;
   padding: 30px;
 
@@ -49,7 +50,7 @@ input[type="password"] {
   box-sizing: border-box;
   margin-bottom: 10px;
   padding: 4px;
-  width: 210px;
+  width: 300px;
   height: 30px;
   border: none;
   border-bottom: 1px solid #AAA;
@@ -100,8 +101,8 @@ button[type="cancel"] {
     
   }
 
-input[type="submit"]:hover,
-input[type="submit"]:focus {
+button[type="submit"]:hover,
+button[type="submit"]:focus {
   opacity: 0.8;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   transition: 0.1s ease;
@@ -124,7 +125,7 @@ button[type="cancel"]:active
 
 .employer{
     position: relative;
-    margin-left:15px;
+    margin-left:10px;
   }
 
   body { padding: 2em; }

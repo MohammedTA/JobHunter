@@ -1,30 +1,40 @@
-
-<form id="login-box" >
+<form #registrationForm="ngForm" (ngSubmit)="register()" class="form-singup" id="login-box">
     <div class="left">
-        <div class="form-group">
-          <h3>Registration to JobHunter</h3>
-      
-            <div class="accounttype">
-              <input class="worker" type="radio" value="None" id="radioOne" name="account" checked/>
-              <label for="radioOne" class="radio" chec>Worker</label>
-              <input class="employer" type="radio" value="None" id="radioTwo" name="account" />
-              <label for="radioTwo" class="radio">Employer</label>
-            </div>
-              <input type="text" name="username"  required placeholder="Username*" />
-              <input type="text" name="email" required placeholder="E-mail*" />
-      
-            <div>
-              <input type="password" name="password" required placeholder="Password*" />
-              <input type="password" name="password2" required placeholder="Retype password*" />
-            </div>  
-              <p class="reqlabel">
-               * - required 
-              </p>
-              <button class="loginBtn loginBtn--facebook">
-              Login with Facebook
-              </button>
-            <div>   
-            <button type="cancel" name="signup_cancel" value="Cancel">Cancel</button>
-            <button type="submit" name="signup_submit" value="Sign me up">Sing me up</button>
-            </div>
-      </div>
+    <h1 class="d-flex justify-content-center h3 mb-3 font-weight-normal">Sign Up to Job Hunter</h1>
+    
+    <div class="d-flex justify-content-around">
+      <label for="workerRole">Worker
+          <input class="worker" type="radio" id="workerRole" name="role" value="true">
+      </label>
+      <label for="employerRole">Employer
+        <input class="employer" type="radio" id="employerRole" name="role" value="false">
+      </label>
+    </div>
+
+    <label for="inputEmail" class="sr-only">
+        Email address
+    </label>
+    <input type="text" id="inputEmail"  placeholder="Email address or phone number" [(ngModel)]="user.email" name="email" required>
+
+      <label for="inputPassword" class="sr-only">
+          Password
+      </label>
+      <input type="password" id="inputPassword"  placeholder="Password" [(ngModel)]="user.password" name="password" required>
+      <label for="inputPassword" class="sr-only">
+          Password
+      </label>
+      <input type="password" id="inputRetypePassword"  placeholder="Retype password" [(ngModel)]="user.password" name="password" required>
+      <label class="reqlabel">
+          * - required 
+      </label>
+         
+         <button class="loginBtn loginBtn--facebook">
+         Login with Facebook
+         </button>
+    <div>
+        <button type="submit">Sign Up</button>
+        <button (click)="cancel()" type="cancel">Cancel</button>
+    </div>
+    
+</div>
+</form>
