@@ -5,34 +5,75 @@
     <u>Worker profile page</u>
   </h3>
   <div class="form-row forRow">
+    <div *ngIf="errors.surname" class="col-md-3">
+      <div class="alert alert-dark" role="alert">
+        {{errors.surname}}
+      </div>
+    </div>
+    <div *ngIf="errors.name" class="col-md-3">
+      <div class="alert alert-dark" role="alert">
+        {{errors.name}}
+      </div>
+    </div>
+    <div *ngIf="errors.middlename" class="col-md-3">
+      <div class="alert alert-dark" role="alert">
+        {{errors.middlename}}
+      </div>
+    </div>
+  </div>
+  <div class="form-row forRow">
+
     <div class="col-md-3">
       <label>Contact person (full name)*:</label>
     </div>
+
     <div class="col-md-2">
-      <input type="text" class="form-control" placeholder="Surname">
+      <input [(ngModel)]="workerprofile.surname" name="surname" type="text" class="form-control" placeholder="Surname">
     </div>
+
     <div class="col-md-2">
-      <input type="text" class="form-control" placeholder="Name">
+      <input [(ngModel)]="workerprofile.name" name="name" type="text" class="form-control" placeholder="Name">
     </div>
+
     <div class="col-md-2">
-      <input type="text" class="form-control" placeholder="Middlename">
+      <input [(ngModel)]="workerprofile.middlename" name="middlename" type="text" class="form-control"
+        placeholder="Middlename">
     </div>
   </div>
   <br>
+  <div *ngIf="errors.phone" class="form-row forRow">
+    <div class="alert alert-dark" role="alert">
+      {{errors.phone}}
+    </div>
+  </div>
   <div class="form-row forRow">
     <div class="col-md-3">
       <label>Phones*:</label>
     </div>
     <div class="col-md-5">
       <div>
-        <input type="text" class="form-control" placeholder="+380(_ _) _ _ _ - _ _ - _ _">
+        <input type="tel" [(ngModel)]="workerprofile.contacts.phones[0]" class="form-control"
+          placeholder="+380(_ _) _ _ _ - _ _ - _ _">
       </div>
-      <div>
-        <input type="text" class="form-control" placeholder="+380(_ _) _ _ _ - _ _ - _ _">
+      <div style="display: none">
+        <input type="text" [(ngModel)]="workerprofile.contacts.phones[1]" class="form-control"
+          placeholder="+380(_ _) _ _ _ - _ _ - _ _">
+      </div>
+      <div style="display: none">
+        <input type="text" [(ngModel)]="workerprofile.contacts.phones[2]" class="form-control"
+          placeholder="+380(_ _) _ _ _ - _ _ - _ _">
+      </div>
+      <div style="display: none">
+        <input type="text" [(ngModel)]="workerprofile.contacts.phones[3]" class="form-control"
+          placeholder="+380(_ _) _ _ _ - _ _ - _ _">
+      </div>
+      <div style="display: none">
+        <input type="text" [(ngModel)]="workerprofile.contacts.phones[4]" class="form-control"
+          placeholder="+380(_ _) _ _ _ - _ _ - _ _">
       </div>
     </div>
     <div class="col-md-1">
-      <input type="button" class="form-control" value="+">
+      <button class="form-control" (click)="AddPhone()">+</button>
     </div>
   </div>
   <br>
@@ -41,7 +82,7 @@
       <label>Viber:</label>
     </div>
     <div class="col-md-6">
-      <input type="text" class="form-control">
+      <input type="text" class="form-control" [(ngModel)]="workerprofile.contacts.viber">
     </div>
   </div>
   <div class="form-row forRow">
@@ -49,7 +90,7 @@
       <label>Telegram:</label>
     </div>
     <div class="col-md-6">
-      <input type="text" class="form-control">
+      <input type="text" class="form-control" [(ngModel)]="workerprofile.contacts.telegram">
     </div>
   </div>
   <div class="form-row forRow">
@@ -57,7 +98,7 @@
       <label>Whats up:</label>
     </div>
     <div class="col-md-6">
-      <input type="text" class="form-control">
+      <input type="text" class="form-control" [(ngModel)]="workerprofile.contacts.whats_up">
     </div>
   </div>
   <div class="form-row forRow">
@@ -65,16 +106,26 @@
       <label>Skype:</label>
     </div>
     <div class="col-md-6">
-      <input type="text" class="form-control">
+      <input type="text" class="form-control" [(ngModel)]="workerprofile.contacts.skype">
     </div>
   </div>
   <br>
+  <div *ngIf="errors.password" class="form-row">
+    <div class="alert alert-dark" role="alert">
+      {{errors.password}}
+    </div>
+  </div>
+  <div *ngIf="errors.confirm_password" class="form-row">
+    <div class="alert alert-dark" role="alert">
+      {{errors.confirm_password}}
+    </div>
+  </div>
   <div class="form-row forRow">
     <div class="col-md-3">
       <label>Password*:</label>
     </div>
     <div class="col-md-6">
-      <input type="password" class="form-control" placeholder="Password">
+      <input type="password" class="form-control" placeholder="Password" [(ngModel)]="workerprofile.password">
     </div>
   </div>
   <div class="form-row forRow">
@@ -82,7 +133,8 @@
       <label>Confirm password*:</label>
     </div>
     <div class="col-md-6">
-      <input type="password" class="form-control" placeholder="Confirm password">
+      <input type="password" class="form-control" placeholder="Confirm password"
+        [(ngModel)]="workerprofile.confirm_password">
     </div>
   </div>
 
@@ -97,12 +149,10 @@
 
   <div class="form-row float-right">
     <div class="col-md-auto">
-      <input type="button" class="form-control" value="Save changes" />
+      <button class="form-control" (click)="SendData()">Save changes</button>
     </div>
     <div class="col-md-auto">
-      <input type="button" class="form-control" value="Cancel" />
+      <button class="form-control">Cancel</button>
     </div>
   </div>
 </div>
-
-
