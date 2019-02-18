@@ -7,7 +7,7 @@ namespace JobHunter.Domain.Interfaces
 {
     public interface IVacancyService
     {
-        IEnumerable<VacancyListModel> GetVacancies(FilterModel filterModel);
+        PaginationOutPutModel<VacancyListModel> GetVacancies(FilterModel filterModel);
         PaginationOutPutModel<VacancyListModel> GetPaginationOutputList(PaginationParamsModel paginationModel);
     }
 }

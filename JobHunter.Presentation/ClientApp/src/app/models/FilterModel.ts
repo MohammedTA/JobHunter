@@ -26,5 +26,6 @@ export const filterModel:FilterModel={
     visa:{
       on:false,
       off:false
-    }
+  },
+  currentPage: 1,
 };

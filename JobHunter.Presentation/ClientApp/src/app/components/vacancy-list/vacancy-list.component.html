@@ -21,50 +21,51 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8 col-sm-8" *ngIf="paginatedVacancyList">
-        <div class="card"  *ngFor="let vacancy of paginatedVacancyList.paginatedList">
+        <div class="card" *ngFor="let vacancy of paginatedVacancyList.paginatedList">
           <div class="card-header">
-            <h3> {{vacancy.title}} <span class="cost" data-toggle="tooltip"  title="{{vacancy.vacancyCost}} $" *ngIf="vacancy.vacancyCost">{{vacancy.vacancyCost}}</span></h3>
+            <h3>   <a [routerLink]='[vacancy.id]'>{{vacancy.title}} </a><span class="cost" data-toggle="tooltip" title="{{vacancy.vacancyCost}} $" *ngIf="vacancy.vacancyCost">{{vacancy.vacancyCost}}</span></h3>
+
           </div>
-           <div class="card-body">
-             <div class="row">
+          <div class="card-body">
+            <div class="row">
               <div class="details-wrapper col-md-6">
                 <div>
                   <span>{{vacancy.companyTitle}}</span>
                 </div>
                 <div>
-                    <span>{{vacancy.vacancyCity}}</span>
-                  </div>
-                  <div >
-                       <span *ngIf="vacancy.isHot" class="vacancy-hot">hot</span>
-                    </div>
+                  <span>{{vacancy.vacancyCity}}</span>
                 </div>
+                <div>
+                  <span *ngIf="vacancy.isHot" class="vacancy-hot">hot</span>
+                </div>
+              </div>
               <div class="image-wrapper col-md-6">
                 <img class="logo" src={{vacancy.companyLogo}} alt="Company logo" />
               </div>
-               </div>
+            </div>
             <p class="card-text">{{vacancy.description}}</p>
             <div class="date-wrapper"> <span>{{vacancy.date}}</span> </div>
           </div>
         </div>
         <nav>
-        <ul *ngIf="pager.pages && pager.pages.length" class="pagination  justify-content-center">
-          <li [ngClass]="{disabled:pager.currentPage === 1}"  class="page-item">
+          <ul *ngIf="pager.pages && pager.pages.length" class="pagination  justify-content-center">
+            <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item">
               <a class="page-link" (click)="setPage(1)">First</a>
-          </li>
-          <li [ngClass]="{disabled:pager.currentPage === 1}"  class="page-item">
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item">
               <a class="page-link" (click)="setPage(pager.currentPage - 1)">Previous</a>
-          </li>
-          <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item">
+            </li>
+            <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item">
               <a class="page-link" (click)="setPage(page)">{{page}}</a>
-          </li>
-          <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item">
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item">
               <a class="page-link" (click)="setPage(pager.currentPage + 1)">Next</a>
-          </li>
-          <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}"  class="page-item">
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item">
               <a class="page-link" (click)="setPage(pager.totalPages)">Last</a>
-          </li>
-      </ul>
-    </nav>
+            </li>
+          </ul>
+        </nav>
       </div>
       <div class="col-md-4 col-sm-8">
         <form *ngIf='isFiltersVisible'>

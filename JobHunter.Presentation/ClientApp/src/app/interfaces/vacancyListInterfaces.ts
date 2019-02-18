@@ -18,7 +18,8 @@ export interface VacancyListModel {
     language:LanguageProficiency;
     experience:string,
     accomodation:Accomodation;
-    visa:Visa;
+    visa: Visa;
+    currentPage: number;
   }
   
   export interface Gender{

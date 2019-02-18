@@ -1,5 +1,5 @@
-import { filterModel } from '../../models/VacancyList';
-import { VacancyListModel, FilterModel, PaginatedVacancyList, PageModel } from '../../interfaces/vacancyListInterfaces';
+import { filterModel } from '../../models/FilterModel';
+import { FilterModel, PaginatedVacancyList } from '../../interfaces/vacancyListInterfaces';
 import { VacancyService } from '../../services/vacancy.service';
 import { PaginationService } from '../../services/pagination.service';
 import { Component, OnInit } from '@angular/core';
@@ -11,19 +11,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./vacancy-list.component.css']
 })
 export class VacancyListComponent implements OnInit {
-
-  pageModel: PageModel = { currentPage:1, pageSize:5 };
   paginatedVacancyList: PaginatedVacancyList;
   filters: FilterModel;
-  isFiltersVisible:boolean=true;
+  isFiltersVisible:boolean=false;
   pager: any = {};
   private paginationservice:PaginationService=new PaginationService();
   pagedItems: any[];
   constructor(private router: Router, private vacancyservice:VacancyService) { 
-  this.filters=filterModel;
+    this.filters = filterModel;
   }
   ngOnInit() {
-    this.vacancyservice.getVacanciesList(this.pageModel).subscribe(result => {
+    this.vacancyservice.getVacanciesList(this.filters).subscribe(result => {
       this.paginatedVacancyList = result;
       this.setPage(this.paginatedVacancyList.pageInfo.currentPage);
     }, error => console.log(error));
@@ -42,8 +40,9 @@ export class VacancyListComponent implements OnInit {
     if (page < 1 || page > this.pager.totalPages) {
         return;
     }
-    this.pageModel.currentPage=page;
-    this.vacancyservice.getVacanciesList(this.pageModel).subscribe(result => {
+    //this.pageModel.currentPage = page;
+    this.filters.currentPage = page;
+    this.vacancyservice.getVacanciesList(this.filters).subscribe(result => {
     this.paginatedVacancyList = result;
     this.pager = this.paginationservice.getPager(this.paginatedVacancyList.pageInfo.totalItems, this.paginatedVacancyList.pageInfo.currentPage,
     this.paginatedVacancyList.pageInfo.itemsPerPage, this.paginatedVacancyList.pageInfo.totalPages);
@@ -53,10 +52,11 @@ export class VacancyListComponent implements OnInit {
     this.isFiltersVisible=!this.isFiltersVisible;
   }
   private onSearchClick = () => {
-    this.pageModel.currentPage = 2;
-    this.vacancyservice.getVacanciesList(this.pageModel).subscribe(result => {
+    this.filters.currentPage = 1;
+    this.vacancyservice.getVacancies(this.filters).subscribe(result => {
       this.paginatedVacancyList = result;
-      console.log(this.paginatedVacancyList);
+      this.pager = this.paginationservice.getPager(this.paginatedVacancyList.pageInfo.totalItems, this.paginatedVacancyList.pageInfo.currentPage,
+      this.paginatedVacancyList.pageInfo.itemsPerPage, this.paginatedVacancyList.pageInfo.totalPages);
   }, error => console.error(error));};
  // console.log(this.filters); this.router.navigate( ['/jobs'],  { queryParams:this.filters})
 }

@@ -13,10 +13,11 @@ export class VacancyService {
     // query = this.VACANCIES_API + `\?city= ${params.city}`
     //                               + `&city=${params.city.split("&city=")}`
     //                               + `&gend` 
-    return this.http.post<VacancyListModel[]>(this.VACANCIES_API +'GetVacancies', params);
+    return this.http.post<PaginatedVacancyList>(this.VACANCIES_API +'GetVacancies', params);
   }
-  getVacanciesList(pagemodel: PageModel) {
-    let params = new HttpParams().set("currentPage", pagemodel.currentPage.toString()).set("pageSize", pagemodel.pageSize.toString());
-    return this.http.get<PaginatedVacancyList>(this.VACANCIES_API + 'GetVacanciesList', {params: params });
+  getVacanciesList(params: FilterModel/*pagemodel: PageModel*/) {
+    return this.http.post<PaginatedVacancyList>(this.VACANCIES_API + 'GetVacancies', params);
+    //let params = new HttpParams().set("currentPage", pagemodel.currentPage.toString()).set("pageSize", pagemodel.pageSize.toString());
+    //return this.http.get<PaginatedVacancyList>(this.VACANCIES_API + 'GetVacanciesList', {params: params });
   }
 }
