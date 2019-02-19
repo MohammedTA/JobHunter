@@ -1,7 +1,7 @@
 
-export class PaginationService{
-    getPager(totalItems: number, currentPage: number = 1, pageSize: number = 5, totalPages:number){
-        const offset:number=2;
+export class PaginationService {
+    getPager(totalItems: number, currentPage: number = 1, pageSize: number = 5, totalPages: number) {
+        const offset = 2;
         let startPage: number, endPage: number;
         if (totalPages <= 5) {
             startPage = 1;
@@ -18,10 +18,10 @@ export class PaginationService{
                 endPage = currentPage + offset;
             }
         }
-        let startIndex = (currentPage - 1) * pageSize;
-        let endIndex = Math.min(startIndex + pageSize - 1, totalItems - 1);
-        let pages:number[]=[];
-        for (let i=startPage; i<=endPage; i++){
+        const startIndex = (currentPage - 1) * pageSize;
+        const endIndex = Math.min(startIndex + pageSize - 1, totalItems - 1);
+        const pages: number[] = [];
+        for (let i = startPage; i <= endPage; i++) {
            pages.push(i);
         }
         return {
@@ -35,5 +35,5 @@ export class PaginationService{
             endIndex: endIndex,
             pages: pages
         };
-    }   
+    }
 }

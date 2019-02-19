@@ -12,20 +12,20 @@ import { Router } from '@angular/router';
 })
 export class VacancyListComponent implements OnInit {
   paginatedVacancyList: PaginatedVacancyList;
-  filters: FilterModel;
-  isFiltersVisible:boolean=false;
+  filters: FilterModel = Object.assign({}, filterModel);
+  isFiltersVisible = false;
   pager: any = {};
-  private paginationservice:PaginationService=new PaginationService();
+  private paginationservice: PaginationService = new PaginationService();
   pagedItems: any[];
-  constructor(private router: Router, private vacancyservice:VacancyService) { 
-    this.filters = filterModel;
+  constructor(private router: Router, private vacancyservice: VacancyService) {
   }
   ngOnInit() {
-    this.vacancyservice.getVacanciesList(this.filters).subscribe(result => {
-      this.paginatedVacancyList = result;
-      this.setPage(this.paginatedVacancyList.pageInfo.currentPage);
-    }, error => console.log(error));
-    
+    this.setPage();
+    // this.vacancyservice.getVacanciesList(this.filters).subscribe(result => {
+    //   this.paginatedVacancyList = result;
+    //   this.setPage(this.paginatedVacancyList.pageInfo.currentPage);
+    // }, error => console.log(error));
+
     //this.vacancyservice.getVacancies(this.filters).subscribe(result => {
     //  this.vacancies = result;
     //}, error => console.error(error));
@@ -36,27 +36,30 @@ export class VacancyListComponent implements OnInit {
   //    { id: 1, title: 'vacancy1', description: 'dfdfdfdfdf', date: new Date().toLocaleDateString(), companyTitle: 'Wargaming', vacancyCity: 'Kyiv', isHot: false, isVip: false, logo: '', vacancyCost: '300'}
   //]
   }
-  private setPage(page: number) {
+  private setPage(page: number = 1) {
     if (page < 1 || page > this.pager.totalPages) {
         return;
     }
+   
     //this.pageModel.currentPage = page;
     this.filters.currentPage = page;
     this.vacancyservice.getVacanciesList(this.filters).subscribe(result => {
     this.paginatedVacancyList = result;
-    this.pager = this.paginationservice.getPager(this.paginatedVacancyList.pageInfo.totalItems, this.paginatedVacancyList.pageInfo.currentPage,
+    this.pager = this.paginationservice.getPager(this.paginatedVacancyList.pageInfo.totalItems,
+    this.paginatedVacancyList.pageInfo.currentPage,
     this.paginatedVacancyList.pageInfo.itemsPerPage, this.paginatedVacancyList.pageInfo.totalPages);
   }, error => console.error(error));
   }
-  private ToggleFiltersVisibility(){
-    this.isFiltersVisible=!this.isFiltersVisible;
+  private ToggleFiltersVisibility() {
+    this.isFiltersVisible = !this.isFiltersVisible;
   }
   private onSearchClick = () => {
     this.filters.currentPage = 1;
     this.vacancyservice.getVacancies(this.filters).subscribe(result => {
       this.paginatedVacancyList = result;
-      this.pager = this.paginationservice.getPager(this.paginatedVacancyList.pageInfo.totalItems, this.paginatedVacancyList.pageInfo.currentPage,
+      this.pager = this.paginationservice.getPager(this.paginatedVacancyList.pageInfo.totalItems, 
+        this.paginatedVacancyList.pageInfo.currentPage,
       this.paginatedVacancyList.pageInfo.itemsPerPage, this.paginatedVacancyList.pageInfo.totalPages);
-  }, error => console.error(error));};
+  }, error => console.error(error)); }
  // console.log(this.filters); this.router.navigate( ['/jobs'],  { queryParams:this.filters})
 }
