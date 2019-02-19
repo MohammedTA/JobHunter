@@ -25,15 +25,28 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\interfaces\categoryListInterfaces.ts" />
+    <None Remove="ClientApp\src\app\models\category.ts" />
+    <None Remove="ClientApp\src\app\models\CategoryList.ts" />
+    <None Remove="ClientApp\src\app\models\mock-categories.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\JobHunter.Domain\JobHunter.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\src\app\models\" />
     <Folder Include="ClientApp\src\app\modules\" />
     <Folder Include="ClientApp\src\app\services\" />
     <Folder Include="Controllers\API\" />
     <Folder Include="ViewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\categoryListInterfaces.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\category.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\CategoryList.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\mock-categories.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

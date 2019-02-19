@@ -1,0 +1,23 @@
+<h2>Сategories list:</h2>
+
+
+<body>
+  <div>
+    <div class="row">
+      <div class="col-md-12">
+        <form class="form-row">
+          <div class="form-group col-md-12">
+            <input type="search" class="form-control" name="query" placeholder="Category">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+      <ul class="categories-list">
+          <li *ngFor="let category of categories">
+            <a href="/jobs-{{ category.name }}">{{ category.name }}</a>
+          </li>
+      </ul>
+  </div>
+</body>
