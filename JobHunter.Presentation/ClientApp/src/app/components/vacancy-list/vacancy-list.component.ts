@@ -1,5 +1,5 @@
 import { filterModel } from '../../models/FilterModel';
-import { FilterModel, PaginatedVacancyList } from '../../interfaces/vacancyListInterfaces';
+import { FilterModel, PaginatedVacancyList, PageInfo } from '../../interfaces/vacancyListInterfaces';
 import { VacancyService } from '../../services/vacancy.service';
 import { PaginationService } from '../../services/pagination.service';
 import { Component, OnInit } from '@angular/core';
@@ -11,55 +11,43 @@ import { Router } from '@angular/router';
   styleUrls: ['./vacancy-list.component.css']
 })
 export class VacancyListComponent implements OnInit {
+  private readonly DEFAULT_PAGE: number = 1;
   paginatedVacancyList: PaginatedVacancyList;
   filters: FilterModel = Object.assign({}, filterModel);
+  searchParams: FilterModel = Object.assign({}, filterModel);
   isFiltersVisible = false;
-  pager: any = {};
+  pageHelper: any = {};
   private paginationservice: PaginationService = new PaginationService();
-  pagedItems: any[];
+
   constructor(private router: Router, private vacancyservice: VacancyService) {
   }
   ngOnInit() {
     this.setPage();
-    // this.vacancyservice.getVacanciesList(this.filters).subscribe(result => {
-    //   this.paginatedVacancyList = result;
-    //   this.setPage(this.paginatedVacancyList.pageInfo.currentPage);
-    // }, error => console.log(error));
-
-    //this.vacancyservice.getVacancies(this.filters).subscribe(result => {
-    //  this.vacancies = result;
-    //}, error => console.error(error));
-  //  this.vacancies=[
-  //  {id:1, title:'vacancy1',description:'dfdfdfdfdf', date:new Date().toLocaleDateString(),companyTitle:'SoftServe', vacancyCity:'Lviv', isHot:true, isVip:false,  logo:'', vacancyCost:''},
-  //    { id: 1, title: 'vacancy1', description: 'dfdfdfdfdf', date: new Date().toLocaleDateString(), companyTitle: 'HoneyCombSoft', vacancyCity: 'Rivne', isHot: true, isVip: false, logo: '', vacancyCost: '500'},
-  //    { id: 1, title: 'vacancy1', description: 'dfdfdfdfdf', date: new Date().toLocaleDateString(), companyTitle: 'AB Games', vacancyCity: 'Rivne', isHot: false, isVip: false, logo: '', vacancyCost: '100'},
-  //    { id: 1, title: 'vacancy1', description: 'dfdfdfdfdf', date: new Date().toLocaleDateString(), companyTitle: 'Wargaming', vacancyCity: 'Kyiv', isHot: false, isVip: false, logo: '', vacancyCost: '300'}
-  //]
   }
-  private setPage(page: number = 1) {
-    if (page < 1 || page > this.pager.totalPages) {
-        return;
+  private setPage(page: number = this.DEFAULT_PAGE) {
+    if (page < 1 || page > this.pageHelper.totalPages) {
+      return;
     }
-   
-    //this.pageModel.currentPage = page;
-    this.filters.currentPage = page;
-    this.vacancyservice.getVacanciesList(this.filters).subscribe(result => {
-    this.paginatedVacancyList = result;
-    this.pager = this.paginationservice.getPager(this.paginatedVacancyList.pageInfo.totalItems,
-    this.paginatedVacancyList.pageInfo.currentPage,
-    this.paginatedVacancyList.pageInfo.itemsPerPage, this.paginatedVacancyList.pageInfo.totalPages);
-  }, error => console.error(error));
+    this.searchParams.currentPage = page;
+    this.vacancyservice.getVacanciesList(this.searchParams).subscribe(result => {
+      this.paginatedVacancyList = result;
+      this.setPageHelper(this.paginatedVacancyList.pageInfo);
+    }, error => console.error(error));
   }
   private ToggleFiltersVisibility() {
     this.isFiltersVisible = !this.isFiltersVisible;
   }
   private onSearchClick = () => {
-    this.filters.currentPage = 1;
-    this.vacancyservice.getVacancies(this.filters).subscribe(result => {
+    this.searchParams = Object.assign({}, this.filters);
+    this.searchParams.currentPage = this.DEFAULT_PAGE;
+    this.vacancyservice.getVacancies(this.searchParams).subscribe(result => {
       this.paginatedVacancyList = result;
-      this.pager = this.paginationservice.getPager(this.paginatedVacancyList.pageInfo.totalItems, 
-        this.paginatedVacancyList.pageInfo.currentPage,
-      this.paginatedVacancyList.pageInfo.itemsPerPage, this.paginatedVacancyList.pageInfo.totalPages);
-  }, error => console.error(error)); }
- // console.log(this.filters); this.router.navigate( ['/jobs'],  { queryParams:this.filters})
+      this.setPageHelper(this.paginatedVacancyList.pageInfo);
+    }, error => console.error(error));
+  }
+
+  private setPageHelper = (pageinfo: PageInfo) => {
+    this.pageHelper = this.paginationservice.getPager(pageinfo.totalItems, pageinfo.currentPage,
+       pageinfo.itemsPerPage, pageinfo.totalPages);
+  }
 }
