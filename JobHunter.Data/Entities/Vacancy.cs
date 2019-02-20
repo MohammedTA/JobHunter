@@ -20,7 +20,8 @@ namespace JobHunter.Data.Entities
         public int ViewCount { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime ExpirationDate { get; set; }
-        public string Salary { get; set; }
+        public DateTime ExpirationStatusDate { get; set; }
+        public decimal Salary { get; set; }
         public string Description { get; set; }
         public Byte Gender { get; set; }
         public string WorkExperience { get; set; }
@@ -28,7 +29,6 @@ namespace JobHunter.Data.Entities
         public string Cost { get; set; }
         public Boolean Visa { get; set; }
         public string SalaryComment { get; set; }
-        public string Currency { get; set; }
         public Boolean AgreementSpam { get; set; }
 
         public int? LanguageId { get; set; }
@@ -42,6 +42,15 @@ namespace JobHunter.Data.Entities
 
         public int EmployerId { get; set; }
         public virtual Employer Employer { get; set; }
+        
+        public int StatusId { get; set; }
+        public virtual Status Status { get; set; }
+
+        public int JobTypeId { get; set; }
+        public virtual JobType JobType { get; set; }
+
+        public int CurrencyId { get; set; }
+        public virtual Currency Currency { get; set; }
 
         public virtual ICollection<Auction> Auctions { get; set; }
         public virtual ICollection<Response> Responses { get; set; }

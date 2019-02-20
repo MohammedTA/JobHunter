@@ -32,6 +32,11 @@ namespace JobHunter.Data
         public virtual DbSet<OperationLog> OperationLogs { get; set; }
         public virtual DbSet<Language> Languages { get; set; }
         public virtual DbSet<FavoriteResume> FavoriteResumes { get; set; }
+        public virtual DbSet<Status> Statuses { get; set; }
+        public virtual DbSet<JobType> JobTypes { get; set; }
+        public virtual DbSet<Currency> Currencies { get; set; }
+
+
 
         public ApplicationContext()
         {
@@ -48,7 +53,8 @@ namespace JobHunter.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLazyLoadingProxies();
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=jobhunterdb;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\projectsv13;Database=jobhunterdb;Trusted_Connection=True;");
+            //optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=jobhunterdb;Trusted_Connection=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -60,6 +66,12 @@ namespace JobHunter.Data
 
             builder.ApplyConfiguration(new LanguageInitialConfig());
             builder.ApplyConfiguration(new CountryInitialConfig());
+            builder.ApplyConfiguration(new StatusInitialConfig());
+
+            //
+            builder.Entity<Profile>().HasOne(x => x.User).WithOne(y => y.Profile);
+            
+            //
 
             base.OnModelCreating(builder);
         }

@@ -8,8 +8,8 @@ namespace JobHunter.Data.Entities
     {
         public int Id { get; set; }
         public Boolean IsActive { get; set; }
-        public int VacancyId { get; set; }
-        public int ResumeId { get; set; }
+        public int? VacancyId { get; set; }
+        public int? ResumeId { get; set; }
         public DateTime AddDate { get; set; }
 
         public virtual Vacancy Vacancy { get; set; }
