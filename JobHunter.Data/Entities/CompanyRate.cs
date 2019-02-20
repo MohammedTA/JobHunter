@@ -8,7 +8,7 @@ namespace JobHunter.Data.Entities
     {
         public int Id { get; set; }
         public int Rate { get; set; }
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
         public int EmployerId { get; set; }
 
         public virtual Employer Employer { get; set; }
