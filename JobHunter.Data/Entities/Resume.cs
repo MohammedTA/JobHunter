@@ -21,11 +21,13 @@ namespace JobHunter.Data.Entities
         public string Video { get; set; }
         public Boolean AgreementSpam { get; set; }
         public int ProfileId { get; set; }
+        public int CategoryId { get; set; }
 
+        public virtual Category Category { get; set; }
         public virtual Profile Profile { get; set; }
         public virtual ICollection<ResumeCountry> ResumeCountries { get; set; }
         public virtual ICollection<Employer> Employers { get; set; }
         public virtual ICollection<Response> Responses { get; set; }
-
+        public virtual ICollection<FavoriteResume> FavoriteResumes { get; set; }
     }
 }

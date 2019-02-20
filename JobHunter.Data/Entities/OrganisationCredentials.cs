@@ -4,11 +4,11 @@ using System.Text;
 
 namespace JobHunter.Data.Entities
 {
-    public class Payment
+    public class OrganisationCredentials
     {
         public int Id { get; set; }
-        public string Amount { get; set; }
-        public string Destination { get; set; }
+        public string Code { get; set; }
+        public Byte Type { get; set; }
         public int EmployerId { get; set; }
 
         public virtual Employer Employer { get; set; }

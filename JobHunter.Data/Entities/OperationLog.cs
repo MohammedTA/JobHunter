@@ -11,6 +11,7 @@ namespace JobHunter.Data.Entities
         public string Comment { get; set; }
         public DateTime LogDate { get; set; }
         public int VacancyId { get; set; }
+        //adminId
 
         public virtual Vacancy Vacancy { get; set; }
     }

@@ -20,14 +20,8 @@ namespace JobHunter.Data.Entities
         public string Screenshot { get; set; }
 
        
-        public int? ParentFeedbackId { get; set; }
-
-        [ForeignKey(nameof(ParentFeedbackId))]
-        [InverseProperty(nameof(VacancyFeedbacks))]
-        public virtual VacancyFeedback ParentFeedback { get; set; }
-
-
-        [ForeignKey(nameof(ParentFeedbackId))]
+        public int? ParentVacancyFeedbacksd { get; set; }
+        public virtual VacancyFeedback ParentVacancyFeedback { get; set; }
         public virtual ICollection<VacancyFeedback> VacancyFeedbacks { get; set; }
 
 

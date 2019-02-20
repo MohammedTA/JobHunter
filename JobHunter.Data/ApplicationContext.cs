@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using JobHunter.Data.Configuration;
+using JobHunter.Data.Configuration.InitialDataConfiguration;
 
 namespace JobHunter.Data
 {
@@ -29,6 +30,8 @@ namespace JobHunter.Data
         public virtual DbSet<Response> Responses { get; set; }
         public virtual DbSet<VacancyComplaint> VacancyComplaints { get; set; }
         public virtual DbSet<OperationLog> OperationLogs { get; set; }
+        public virtual DbSet<Language> Languages { get; set; }
+        public virtual DbSet<FavoriteResume> FavoriteResumes { get; set; }
 
         public ApplicationContext()
         {
@@ -50,24 +53,13 @@ namespace JobHunter.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.ApplyConfiguration(new ResumeCountryConfiguration());
             builder.ApplyConfiguration(new VacancyFeedbackConfiguration());
 
-            //
-            builder.Entity<ResumeCountry>()
-           .HasKey(x => new { x.ResumeId, x.CountryId });
+            //Initial Data Configurations
 
-            builder.Entity<ResumeCountry>()
-                .HasOne(c=>c.Resume)
-                .WithMany(s=> s.ResumeCountries)
-                .HasForeignKey(sc => sc.ResumeId);
-
-            builder.Entity<ResumeCountry>()
-               .HasOne(c => c.Country)
-               .WithMany(s => s.ResumeCountries)
-               .HasForeignKey(sc => sc.CountryId);
-
-            //
-
+            builder.ApplyConfiguration(new LanguageInitialConfig());
+            builder.ApplyConfiguration(new CountryInitialConfig());
 
             base.OnModelCreating(builder);
         }
