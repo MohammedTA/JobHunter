@@ -8,20 +8,13 @@ export interface IWorkerProfile {
 }
 
 export interface IContacts {
-  phones: string[];
+  phones: IPhone[];
   viber: string;
   telegram: string;
   skype: string;
   whats_up: string;
 }
 
-
-
-export interface IErrors {
+export interface IPhone {
   phone: string;
-  surname: string;
-  name: string;
-  middlename: string;
-  password: string;
-  confirm_password: string;
 }

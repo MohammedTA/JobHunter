@@ -1,4 +1,4 @@
-import { IContacts, IWorkerProfile, IErrors } from '../interfaces/IWorker_profile';
+import { IContacts, IWorkerProfile } from '../interfaces/IWorker_profile';
 
 export const WorkerProfileModel : IWorkerProfile = {
     surname: '',
@@ -7,19 +7,11 @@ export const WorkerProfileModel : IWorkerProfile = {
     password: '',
   confirm_password: '',
   contacts: {
-    phones: ['','','','',''],
+    phones:
+      [{ phone: '' }],
     viber: '',
     telegram: '',
     skype: '',
     whats_up: ''
   }
-}
-
-export const Error : IErrors = {
-  phone: '',
-  surname: '',
-  name: '',
-  middlename: '',
-  password: '',
-  confirm_password: ''
 }

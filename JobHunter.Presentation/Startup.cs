@@ -1,10 +1,18 @@
+using JobHunter.Data;
+using JobHunter.Data.Entities;
+using JobHunter.Data.Intefaces;
+using JobHunter.Data.Repository;
+using JobHunter.Domain.Interfaces;
+using JobHunter.Domain.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace JobHunter.Presentation
 {
@@ -21,6 +29,10 @@ namespace JobHunter.Presentation
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddScoped<IWorkerProfileService, WorkerProfileService>();
+            services.AddScoped<IRepository<Profile>, Repository<Profile>>();
+            services.AddScoped<DbContext, ApplicationContext>();
+
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -54,15 +66,26 @@ namespace JobHunter.Presentation
                     template: "{controller}/{action=Index}/{id?}");
             });
 
+            //app.UseSpa(spa =>
+            //{
+            //    // To learn more about options for serving an Angular SPA from ASP.NET Core,
+            //    // see https://go.microsoft.com/fwlink/?linkid=864501
+
+            //    spa.Options.SourcePath = "ClientApp";
+
+            //    if (env.IsDevelopment())
+            //    {
+            //        spa.UseAngularCliServer(npmScript: "start");
+            //    }
+            //});
+
             app.UseSpa(spa =>
             {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core,
-                // see https://go.microsoft.com/fwlink/?linkid=864501
-
                 spa.Options.SourcePath = "ClientApp";
 
                 if (env.IsDevelopment())
                 {
+                    spa.Options.StartupTimeout = new TimeSpan(0, 0, 160);
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });

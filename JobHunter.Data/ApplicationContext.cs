@@ -53,8 +53,8 @@ namespace JobHunter.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLazyLoadingProxies();
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\projectsv13;Database=jobhunterdb;Trusted_Connection=True;");
-            //optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=jobhunterdb;Trusted_Connection=True;");
+           // optionsBuilder.UseSqlServer(@"Server=(localdb)\projectsv13;Database=jobhunterdb;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=jobhunterdb;Trusted_Connection=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

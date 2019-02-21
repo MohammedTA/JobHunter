@@ -4,23 +4,23 @@
   <h3>
     <u>Worker profile page</u>
   </h3>
-  <div class="form-row forRow">
+  <!-- <div class="form-row forRow">
     <div *ngIf="errors.surname" class="col-md-3">
       <div class="alert alert-dark" role="alert">
         {{errors.surname}}
       </div>
-    </div>
-    <div *ngIf="errors.name" class="col-md-3">
+    </div> 
+    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
       <div class="alert alert-dark" role="alert">
-        {{errors.name}}
+        Name must between 1 to 255
       </div>
     </div>
-    <div *ngIf="errors.middlename" class="col-md-3">
+   <div *ngIf="errors.middlename" class="col-md-3">
       <div class="alert alert-dark" role="alert">
         {{errors.middlename}}
       </div>
     </div>
-  </div>
+  </div> -->
   <div class="form-row forRow">
 
     <div class="col-md-3">
@@ -37,39 +37,22 @@
 
     <div class="col-md-2">
       <input [(ngModel)]="workerprofile.middlename" name="middlename" type="text" class="form-control"
-        placeholder="Middlename">
+             placeholder="Middlename">
     </div>
   </div>
   <br>
-  <div *ngIf="errors.phone" class="form-row forRow">
+  <!-- <div *ngIf="errors.phone" class="form-row forRow">
     <div class="alert alert-dark" role="alert">
       {{errors.phone}}
     </div>
-  </div>
+  </div> -->
   <div class="form-row forRow">
     <div class="col-md-3">
       <label>Phones*:</label>
     </div>
     <div class="col-md-5">
-      <div>
-        <input type="tel" [(ngModel)]="workerprofile.contacts.phones[0]" class="form-control"
-          placeholder="+380(_ _) _ _ _ - _ _ - _ _">
-      </div>
-      <div style="display: none">
-        <input type="text" [(ngModel)]="workerprofile.contacts.phones[1]" class="form-control"
-          placeholder="+380(_ _) _ _ _ - _ _ - _ _">
-      </div>
-      <div style="display: none">
-        <input type="text" [(ngModel)]="workerprofile.contacts.phones[2]" class="form-control"
-          placeholder="+380(_ _) _ _ _ - _ _ - _ _">
-      </div>
-      <div style="display: none">
-        <input type="text" [(ngModel)]="workerprofile.contacts.phones[3]" class="form-control"
-          placeholder="+380(_ _) _ _ _ - _ _ - _ _">
-      </div>
-      <div style="display: none">
-        <input type="text" [(ngModel)]="workerprofile.contacts.phones[4]" class="form-control"
-          placeholder="+380(_ _) _ _ _ - _ _ - _ _">
+      <div class="form-group" *ngFor="let phone of workerprofile.contacts.phones; let i = index;">
+        <input class="form-control" [(ngModel)]="workerprofile.contacts.phones[i].phone">
       </div>
     </div>
     <div class="col-md-1">
@@ -110,7 +93,7 @@
     </div>
   </div>
   <br>
-  <div *ngIf="errors.password" class="form-row">
+  <!-- <div *ngIf="errors.password" class="form-row">
     <div class="alert alert-dark" role="alert">
       {{errors.password}}
     </div>
@@ -119,7 +102,7 @@
     <div class="alert alert-dark" role="alert">
       {{errors.confirm_password}}
     </div>
-  </div>
+  </div> -->
   <div class="form-row forRow">
     <div class="col-md-3">
       <label>Password*:</label>
@@ -134,14 +117,14 @@
     </div>
     <div class="col-md-6">
       <input type="password" class="form-control" placeholder="Confirm password"
-        [(ngModel)]="workerprofile.confirm_password">
+             [(ngModel)]="workerprofile.confirm_password">
     </div>
   </div>
 
 
-  <div>
+  <!--<div>
     <img src="https://www.colourbox.com/preview/15323674-advertisment.jpg" alt="advertisment" class="adv col-md-12" />
-  </div>
+  </div>-->
 
   <div>
     <label><strong>* Required</strong></label>
