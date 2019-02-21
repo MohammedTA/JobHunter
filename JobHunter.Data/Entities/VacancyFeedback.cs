@@ -15,7 +15,7 @@ namespace JobHunter.Data.Entities
 
         public int Id { get; set; }
         public string Descritpion { get; set; }
-        public int VacancyId { get; set; }
+        public int? VacancyId { get; set; }
         public int UserId { get; set; }
         public string Screenshot { get; set; }
 
