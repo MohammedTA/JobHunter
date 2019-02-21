@@ -1,3 +1,4 @@
+using JobHunter.Domain.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -5,6 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using JobHunter.Domain;
+using JobHunter.Domain.Services;
+using JobHunter.Data.Intefaces;
+using JobHunter.Data.Entities;
+using JobHunter.Data.Repository;
+using JobHunter.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace JobHunter.Presentation
 {
@@ -21,6 +29,9 @@ namespace JobHunter.Presentation
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddScoped<IEmployerProfileService, EmployerProfileService>();
+            services.AddScoped<IRepository<Profile>, Repository<Profile>>();
+            services.AddScoped <DbContext, ApplicationContext>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
