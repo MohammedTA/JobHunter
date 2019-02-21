@@ -1,0 +1,23 @@
+<form [formGroup]="loginForm" (ngSubmit)="login()" class="form-signin" [hidden]="loginForm.disabled">
+  <h1 class="d-flex justify-content-center h3 mb-3 font-weight-normal">Please Sign In</h1>
+
+  <label for="inputEmail" class="sr-only">
+    Email address
+  </label>
+
+  <div class="form-group">
+      <input formControlName="email" type="text" id="inputEmail" class="form-control mb-2" placeholder="Email address or phone number">
+  </div>
+
+  <label for="inputPassword" class="sr-only">
+    Password
+  </label>
+
+  <div class="form-group">
+      <input formControlName="password" type="password" id="inputPassword" class="form-control mb-2" placeholder="Password">
+  </div>
+
+  <button class="btn btn-lg btn-success btn-block" [disabled]="!loginForm.valid" type="submit">Sign In</button>
+  <button class="btn btn-lg btn-primary btn-block" (click)="cancel()" type="submit">Cancel</button>
+</form>
+<app-spinner [isRunning]="isRequesting"></app-spinner>
