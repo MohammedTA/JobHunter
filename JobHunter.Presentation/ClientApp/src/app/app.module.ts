@@ -9,7 +9,9 @@ import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { HomeComponent } from './components/home/home.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { FetchDataComponent } from './components/fetch-data/fetch-data.component';
+import { EmployerProfileComponent } from './employer-profile/employer-profile.component';
 import { VacancyListComponent } from './components/vacancy-list/vacancy-list.component';
+
 
 @NgModule({
   declarations: [
@@ -18,6 +20,7 @@ import { VacancyListComponent } from './components/vacancy-list/vacancy-list.com
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
+    EmployerProfileComponent
     VacancyListComponent
   ],
   imports: [
@@ -27,6 +30,7 @@ import { VacancyListComponent } from './components/vacancy-list/vacancy-list.com
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
+      { path: 'employer-profile', component: EmployerProfileComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'jobs', component: VacancyListComponent },
       { path: 'jobs/:id', component: VacancyListComponent },
