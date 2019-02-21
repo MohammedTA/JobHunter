@@ -10,6 +10,8 @@ import { HomeComponent } from './components/home/home.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { FetchDataComponent } from './components/fetch-data/fetch-data.component';
 import { EmployerProfileComponent } from './employer-profile/employer-profile.component';
+import { VacancyListComponent } from './components/vacancy-list/vacancy-list.component';
+
 
 @NgModule({
   declarations: [
@@ -19,6 +21,7 @@ import { EmployerProfileComponent } from './employer-profile/employer-profile.co
     CounterComponent,
     FetchDataComponent,
     EmployerProfileComponent
+    VacancyListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -29,6 +32,8 @@ import { EmployerProfileComponent } from './employer-profile/employer-profile.co
       { path: 'counter', component: CounterComponent },
       { path: 'employer-profile', component: EmployerProfileComponent },
       { path: 'fetch-data', component: FetchDataComponent },
+      { path: 'jobs', component: VacancyListComponent },
+      { path: 'jobs/:id', component: VacancyListComponent },
     ])
   ],
   providers: [],

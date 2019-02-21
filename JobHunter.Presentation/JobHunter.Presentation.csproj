@@ -30,9 +30,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\src\app\models\" />
     <Folder Include="ClientApp\src\app\modules\" />
     <Folder Include="ClientApp\src\app\services\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
