@@ -1,0 +1,42 @@
+div .date-wrapper, .image-wrapper{
+    display: flex;
+    justify-content: flex-end;
+}
+
+div .card{
+    width: 100%;
+}
+div .card:last-of-type{
+  margin-bottom: 30px;
+}
+div .card:hover{
+    border: 1px solid #abb2ba;
+}
+
+div .searchform{
+    display: flex;
+    justify-content: center;
+}
+
+div .details-wrapper{
+    display: flex;
+    justify-content: space-between;
+}
+
+div .vacancy-hot{
+    background-color:goldenrod;
+    border-radius: 15%;
+    padding: 5px;
+}
+
+.cost{
+  margin-left:20px;
+}
+  .cost::after {
+    content: "$";
+  }
+div .image-wrapper>img{
+  height:40px;
+  width:auto;
+  max-width:160px;
+}
