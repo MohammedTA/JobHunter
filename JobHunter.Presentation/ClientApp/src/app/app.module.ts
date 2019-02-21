@@ -15,6 +15,7 @@ import { HeaderComponent } from './components/Layout/header/header.component';
 import { FooterComponent } from './components/Layout/footer/footer.component';
 import { HotVacanciesComponent } from './components/hot-vacancies/hot-vacancies.component';
 import { CompaniesListComponent } from './components/home/companies-list/companies-list.component';
+import { VacancyListComponent } from './components/vacancy-list/vacancy-list.component';
 
 @NgModule({
   declarations: [
@@ -23,14 +24,7 @@ import { CompaniesListComponent } from './components/home/companies-list/compani
     FooterComponent,
     HotVacanciesComponent,
     CompaniesListComponent,
-    HomeComponent
-    //NavMenuComponent,    
-    //CounterComponent,
-    //FetchDataComponent
-    NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
     VacancyListComponent
   ],
   imports: [
@@ -40,10 +34,9 @@ import { CompaniesListComponent } from './components/home/companies-list/compani
     NgbModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
       { path: 'jobs', component: VacancyListComponent },
       { path: 'jobs/:id', component: VacancyListComponent },
+ 
     ])
   ],
   providers: [],
