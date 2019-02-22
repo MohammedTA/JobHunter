@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="col-12">
+    <div class="container" style="padding-top: 3%">
+      <div class="row align-items-center">
+        <div *ngFor="let company of companies" class="col-2">
+          <div class="container">
+            <div class="view overlay hm-white-slight">
+              <a href="#" title="Vacancies in {{company.name}}">
+                <img src={{company.logoImagePath}} class="img-fluid company-image" alt={{company.name}}>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
