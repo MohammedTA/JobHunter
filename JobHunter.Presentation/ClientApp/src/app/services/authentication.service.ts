@@ -2,7 +2,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { User } from '../models/User';
+import { UserForLogin } from '../models/UserForLogin';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) { }
 
-  login(user: User) {
+  login(user: UserForLogin) {
     return this.http.post(this.baseUrl + 'login', user)
       .pipe(
         map((response: any) => {

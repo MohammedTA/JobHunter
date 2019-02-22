@@ -10,6 +10,7 @@ namespace JobHunter.Data.Intefaces
         T GetById(int id);
         IEnumerable<T> Get();
         IEnumerable<T> Get(Expression<Func<T, bool>> predicate);
+        T GetSingle(Expression<Func<T, bool>> predicate);
         void Add(T entity);
         void Delete(T entity);
         void Edit(T entity);

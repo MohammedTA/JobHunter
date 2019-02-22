@@ -1,4 +1,5 @@
 using System.Text;
+using AutoMapper;
 using JobHunter.Data;
 using JobHunter.Data.Entities;
 using JobHunter.Data.Intefaces;
@@ -6,7 +7,9 @@ using JobHunter.Data.Repository;
 using JobHunter.Domain;
 using JobHunter.Domain.Helpers;
 using JobHunter.Domain.Interfaces;
+using JobHunter.Domain.Models;
 using JobHunter.Domain.Services;
+using JobHunter.Presentation.ViewModels;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,10 +38,12 @@ namespace JobHunter.Presentation
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddScoped<IRepository<User>, Repository<User>>();
-            services.AddScoped<IAuthService, AuthService>();
-
             services.Configure<FacebookAuthSettings>(Configuration.GetSection(nameof(FacebookAuthSettings)));
+
+            services.AddScoped<DbContext, ApplicationContext>();
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddSingleton<IJwtFactory, JwtFactory>();
 
             services.AddDbContext<ApplicationContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("Default"),
@@ -92,6 +97,14 @@ namespace JobHunter.Presentation
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+
+            Mapper.Initialize(config => {
+                config.CreateMap<UserForLoginDto, UserForLoginViewModel>();
+                config.CreateMap<UserForLoginViewModel, UserForLoginDto>();
+            });
+
+            
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

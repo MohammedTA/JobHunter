@@ -25,12 +25,11 @@ export class NavMenuComponent implements OnInit {
     this.authFBservice.authState.subscribe((user) => {
         this.user = user;
         this.FBloggedIn = (user != null);
-        console.log('from facebook component', this.user);
         if (this.user !== null) {
           this.authService.loginWithFacebook(this.user).subscribe(() => {
             this.alertify.success('Login via Facebook');
-          }, () => {
-            this.alertify.error('Error');
+          }, error => {
+            this.alertify.error(error);
           }, () => {
             this.router.navigate(['/profile']);
           });
@@ -47,6 +46,7 @@ export class NavMenuComponent implements OnInit {
     this.FBloggedIn = false;
     localStorage.removeItem('token');
     this.alertify.message('Logged out via Facebook');
+    this.router.navigate(['/']);
   }
 
   loggedIn() {
@@ -54,7 +54,7 @@ export class NavMenuComponent implements OnInit {
   }
 
   loggedInFB() {
-    return this.FBloggedIn;
+    return this.FBloggedIn && localStorage.getItem('token');
   }
 
   logOut() {

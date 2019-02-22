@@ -10,9 +10,6 @@
           <li *ngIf="!loggedIn()" class="nav-item" routerLinkActive="active">
             <a class="btn btn-outline-success mr-2" [routerLink]="['/sign-in']">Sing In</a>
           </li>
-          <li *ngIf="!loggedIn()" class="nav-item" routerLinkActive="active">
-            <a class="btn btn-outline-success" [routerLink]="['/sign-up']">Sing Up</a>
-          </li>
           <li *ngIf="loggedIn()" class="nav-item mr-3">
               <a class="btn btn-outline-success" [routerLink]="['/profile']">Profile</a>
             </li>

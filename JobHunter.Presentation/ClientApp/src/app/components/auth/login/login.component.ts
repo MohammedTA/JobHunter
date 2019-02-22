@@ -1,9 +1,9 @@
-import { User } from "src/app/models/User";
+import { UserForLogin } from 'src/app/models/UserForLogin';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthenticationService } from "src/app/services/authentication.service";
-import { AlertifyService } from "src/app/services/alertify.service";
-import { Component, OnInit } from "@angular/core";
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { AlertifyService } from 'src/app/services/alertify.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +11,7 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  user: User;
+  user: UserForLogin;
   private loggedIn: boolean;
   isRequesting: boolean;
   tokenFromFB: any = {};
@@ -30,8 +30,9 @@ export class LoginComponent implements OnInit {
 
   createLoginForm() {
     this.loginForm = this.fb.group({
-      email: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(10)]]
+      input: ['', Validators.compose([Validators.required,
+      Validators.pattern(/^([_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,5}))|(\d+$)$/)])],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]]
     });
   }
 

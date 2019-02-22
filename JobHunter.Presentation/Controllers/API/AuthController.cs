@@ -41,7 +41,7 @@ namespace JobHunter.Presentation.Controllers.API
             var user = await _service.LoginWithFacebook(facebookLogin.authToken);
 
             if (user == null)
-                return BadRequest("Something went wrong");
+                return BadRequest(Errors.AddErrorToModelState("login_failure", "Invalid username or password.", ModelState));
             
             return Ok(new {
                 token = user

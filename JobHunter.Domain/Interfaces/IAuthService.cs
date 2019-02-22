@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using JobHunter.Domain.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace JobHunter.Domain.Interfaces
 {

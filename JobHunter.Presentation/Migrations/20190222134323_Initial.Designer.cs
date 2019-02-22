@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobHunter.Presentation.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20190221115948_Initial")]
+    [Migration("20190222134323_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
