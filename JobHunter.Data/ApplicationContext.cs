@@ -35,6 +35,7 @@ namespace JobHunter.Data
         public virtual DbSet<Status> Statuses { get; set; }
         public virtual DbSet<JobType> JobTypes { get; set; }
         public virtual DbSet<Currency> Currencies { get; set; }
+        public virtual DbSet<VacancyStatus> VacancyStatus { get; set; }
 
 
 
@@ -67,10 +68,11 @@ namespace JobHunter.Data
             builder.ApplyConfiguration(new VacancyComplaintConfiguration());
 
             //Initial Data Configurations
-
+            builder.ApplyConfiguration(new CountryInitConfig());
+            builder.ApplyConfiguration(new RoleInitConfig());
             builder.ApplyConfiguration(new VacancyInitialConfig());
             builder.ApplyConfiguration(new LanguageInitialConfig());
-            builder.ApplyConfiguration(new CountryInitialConfig());
+           // builder.ApplyConfiguration(new CountryInitialConfig());
             builder.ApplyConfiguration(new StatusInitialConfig());
             builder.ApplyConfiguration(new CategoryInitConfig());
 
