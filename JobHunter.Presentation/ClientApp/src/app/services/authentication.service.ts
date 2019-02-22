@@ -2,8 +2,8 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { UserForLogin } from '../models/UserForLogin';
 import { Injectable } from '@angular/core';
+import { UserForLogin } from '../interfaces/UserForLogin';
 
 @Injectable({
   providedIn: 'root'

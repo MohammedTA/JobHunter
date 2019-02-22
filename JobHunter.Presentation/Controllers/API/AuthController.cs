@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using JobHunter.Domain.Interfaces;
-using JobHunter.Domain.Models;
+using JobHunter.Domain.Models.AuthModels;
 using JobHunter.Presentation.Helpers;
-using JobHunter.Presentation.ViewModels;
+using JobHunter.Presentation.ViewModels.LoginViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JobHunter.Presentation.Controllers.API

@@ -9,7 +9,7 @@ using JobHunter.Data.Entities;
 using JobHunter.Data.Intefaces;
 using JobHunter.Domain.Helpers;
 using JobHunter.Domain.Interfaces;
-using JobHunter.Domain.Models;
+using JobHunter.Domain.Models.AuthModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;

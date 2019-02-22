@@ -1,4 +1,4 @@
-namespace JobHunter.Presentation.ViewModels
+namespace JobHunter.Presentation.ViewModels.LoginViewModels
 {
     public class FacebookLoginViewModel
     {

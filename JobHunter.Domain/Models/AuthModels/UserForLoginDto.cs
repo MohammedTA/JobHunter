@@ -1,4 +1,4 @@
-namespace JobHunter.Domain.Models
+namespace JobHunter.Domain.Models.AuthModels
 {
     public class UserForLoginDto
     {

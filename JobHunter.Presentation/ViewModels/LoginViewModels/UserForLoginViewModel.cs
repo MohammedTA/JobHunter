@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace JobHunter.Presentation.ViewModels
+namespace JobHunter.Presentation.ViewModels.LoginViewModels
 {
     public class UserForLoginViewModel
     {

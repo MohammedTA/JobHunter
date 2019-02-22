@@ -1,9 +1,9 @@
-import { UserForLogin } from 'src/app/models/UserForLogin';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { AlertifyService } from 'src/app/services/alertify.service';
 import { Component, OnInit } from '@angular/core';
+import { UserForLogin } from 'src/app/interfaces/UserForLogin';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,6 @@ export class LoginComponent implements OnInit {
   user: UserForLogin;
   private loggedIn: boolean;
   isRequesting: boolean;
-  tokenFromFB: any = {};
   loginForm: FormGroup;
 
   constructor(

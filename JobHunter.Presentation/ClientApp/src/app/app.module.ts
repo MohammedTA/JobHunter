@@ -1,3 +1,4 @@
+import { HeaderComponent } from './components/Layout/header/header.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -39,7 +40,8 @@ export function tokenGetter() {
     HomeComponent,
     ProfileComponent,
     LoginComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
