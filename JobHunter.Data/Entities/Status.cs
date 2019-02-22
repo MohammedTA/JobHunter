@@ -8,12 +8,12 @@ namespace JobHunter.Data.Entities
     {
         public Status()
         {
-            Vacancies = new List<Vacancy>();
+            VacancyStatuses = new List<VacancyStatus>();
         }
 
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public virtual ICollection<Vacancy> Vacancies { get; set; }
+        public virtual ICollection<VacancyStatus> VacancyStatuses { get; set; }
     }
 }

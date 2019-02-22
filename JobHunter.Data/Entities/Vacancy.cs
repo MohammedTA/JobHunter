@@ -13,6 +13,7 @@ namespace JobHunter.Data.Entities
             Responses = new List<Response>();
             VacancyComplaints = new List<VacancyComplaint>();
             VacancyFeedbacks = new List<VacancyFeedback>();
+            VacancyStatuses = new List<VacancyStatus>();
         }
 
         public int Id { get; set; }
@@ -34,24 +35,26 @@ namespace JobHunter.Data.Entities
         public int? LanguageId { get; set; }
         public virtual Language Language { get; set; }
 
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
         public virtual Category Category { get; set; }
 
-        public int CityId { get; set; }
+        public int? CityId { get; set; }
         public virtual City City { get; set; }
 
-        public int EmployerId { get; set; }
+        public int? EmployerId { get; set; }
         public virtual Employer Employer { get; set; }
         
-        public int StatusId { get; set; }
-        public virtual Status Status { get; set; }
+       // public int StatusId { get; set; }
+        //public virtual Status Status { get; set; }
 
-        public int JobTypeId { get; set; }
+        public int? JobTypeId { get; set; }
         public virtual JobType JobType { get; set; }
 
-        public int CurrencyId { get; set; }
+        public int? CurrencyId { get; set; }
         public virtual Currency Currency { get; set; }
 
+
+        public virtual ICollection<VacancyStatus> VacancyStatuses { get; set; }
         public virtual ICollection<Auction> Auctions { get; set; }
         public virtual ICollection<Response> Responses { get; set; }
         public virtual ICollection<VacancyComplaint> VacancyComplaints { get; set; }

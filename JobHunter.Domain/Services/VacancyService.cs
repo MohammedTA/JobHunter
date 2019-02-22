@@ -5,6 +5,7 @@ using JobHunter.Domain.Models.VacancyModels;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using JobHunter.Data;
 
 namespace JobHunter.Domain.Services
 {

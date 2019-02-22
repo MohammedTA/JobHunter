@@ -59,6 +59,7 @@ namespace JobHunter.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.ApplyConfiguration(new VacancyStatusConfiguration());
             builder.ApplyConfiguration(new ResumeCountryConfiguration());
             builder.ApplyConfiguration(new VacancyFeedbackConfiguration());
             builder.ApplyConfiguration(new CompanyRateConfiguration());
@@ -67,9 +68,11 @@ namespace JobHunter.Data
 
             //Initial Data Configurations
 
+            builder.ApplyConfiguration(new VacancyInitialConfig());
             builder.ApplyConfiguration(new LanguageInitialConfig());
             builder.ApplyConfiguration(new CountryInitialConfig());
             builder.ApplyConfiguration(new StatusInitialConfig());
+            builder.ApplyConfiguration(new CategoryInitConfig());
 
             //
             builder.Entity<Profile>().HasOne(x => x.User).WithOne(y => y.Profile);
