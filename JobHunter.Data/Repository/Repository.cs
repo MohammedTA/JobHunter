@@ -36,6 +36,13 @@ namespace JobHunter.Data.Repository
                    .AsEnumerable();
         }
 
+        public T GetSingle(Expression<Func<T, bool>> predicate)
+        {
+            return _set
+                    .Where(predicate)
+                    .FirstOrDefault();
+        }
+
         public void Add(T entity)
         {
             _set.Add(entity);

@@ -1,19 +1,26 @@
+using System.Text;
+using AutoMapper;
+using JobHunter.Data;
+using JobHunter.Data.Entities;
+using JobHunter.Data.Intefaces;
+using JobHunter.Data.Repository;
+using JobHunter.Domain;
+using JobHunter.Domain.Helpers;
 using JobHunter.Domain.Interfaces;
+using JobHunter.Domain.Models.AuthModels;
 using JobHunter.Domain.Services;
+using JobHunter.Presentation.ViewModels.LoginViewModels;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using JobHunter.Domain;
-using JobHunter.Domain.Services;
-using JobHunter.Data.Intefaces;
-using JobHunter.Data.Entities;
-using JobHunter.Data.Repository;
-using JobHunter.Data;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace JobHunter.Presentation
 {
@@ -31,8 +38,41 @@ namespace JobHunter.Presentation
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddScoped<IEmployerProfileService, EmployerProfileService>();
-            services.AddScoped<IRepository<Profile>, Repository<Profile>>();
-            services.AddScoped <DbContext, ApplicationContext>();
+
+            services.Configure<FacebookAuthSettings>(Configuration.GetSection(nameof(FacebookAuthSettings)));
+
+            services.AddScoped<DbContext, ApplicationContext>();
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddSingleton<IJwtFactory, JwtFactory>();
+
+            services.AddDbContext<ApplicationContext>(options => 
+                options.UseSqlServer(Configuration.GetConnectionString("Default"),
+                m => m.MigrationsAssembly("JobHunter.Presentation")));
+
+            services.AddDefaultIdentity<User>()
+                .AddEntityFrameworkStores<ApplicationContext>();
+
+            services.Configure<IdentityOptions>(options => {
+                options.Password.RequireDigit = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 6;
+            });
+
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options => {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
+                            .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -60,6 +100,14 @@ namespace JobHunter.Presentation
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+
+            Mapper.Initialize(config => {
+                config.CreateMap<UserForLoginDto, UserForLoginViewModel>();
+                config.CreateMap<UserForLoginViewModel, UserForLoginDto>();
+            });
+
+            
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
