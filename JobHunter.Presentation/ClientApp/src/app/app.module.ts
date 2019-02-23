@@ -1,24 +1,41 @@
+import { HeaderComponent } from './components/Layout/header/header.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { FacebookLoginProvider, AuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
+import { AppComponent } from './app.component';
+import { AuthenticationService } from './services/authentication.service';
+import { ErrorInterceptorProvider } from './services/error.interceptor';
+import { AuthGuard } from './_guards/auth.guard';
+import { JwtModule } from '@auth0/angular-jwt';
+import { AlertifyService } from './services/alertify.service';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-import { AppComponent } from './app.component';
-import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
+import { appRoutes } from './route.routing';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 import { HomeComponent } from './components/home/home.component';
-import { CounterComponent } from './components/counter/counter.component';
-import { FetchDataComponent } from './components/fetch-data/fetch-data.component';
-
-import { HeaderComponent } from './components/Layout/header/header.component';
 import { FooterComponent } from './components/Layout/footer/footer.component';
 import { HotVacanciesComponent } from './components/hot-vacancies/hot-vacancies.component';
 import { CompaniesListComponent } from './components/home/companies-list/companies-list.component';
 import { EmployerProfileComponent } from './employer-profile/employer-profile.component';
-
 import { VacancyListComponent } from './components/vacancy-list/vacancy-list.component';
 
+const config = new AuthServiceConfig([
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider('1363750207097183')
+  },
+]);
+
+export function provideConfig() {
+  return config;
+}
+
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
 
 @NgModule({
   declarations: [
@@ -28,29 +45,36 @@ import { VacancyListComponent } from './components/vacancy-list/vacancy-list.com
     HotVacanciesComponent,
     CompaniesListComponent,
     HomeComponent,
-
-    CounterComponent,
-    FetchDataComponent,
-    EmployerProfileComponent
-
-    VacancyListComponent
+    ProfileComponent,
+    LoginComponent,
+    SpinnerComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
-    NgbModule.forRoot(),
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'employer-profile', component: EmployerProfileComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'jobs', component: VacancyListComponent },
-      { path: 'jobs/:id', component: VacancyListComponent },
- 
-    ])
+    ReactiveFormsModule,
+    SocialLoginModule,
+    RouterModule.forRoot(appRoutes),
+    JwtModule.forRoot({
+       config: {
+         tokenGetter: tokenGetter,
+         whitelistedDomains: ['localhost:5001'],
+         blacklistedRoutes: ['localhost:5001/api/auth']
+       }
+     })
   ],
-  providers: [],
+  providers: [
+    AuthenticationService,
+    ErrorInterceptorProvider,
+    AlertifyService,
+    AuthGuard,
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

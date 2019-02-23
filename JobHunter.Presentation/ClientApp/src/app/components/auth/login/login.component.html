@@ -1,0 +1,67 @@
+<form [formGroup]="loginForm" (ngSubmit)="login()" class="form-signin" [hidden]="loginForm.disabled">
+  <h1 class="d-flex justify-content-center h3 mb-3 font-weight-normal">Please Sign In</h1>
+
+  <label for="input" class="sr-only">
+    Email address
+  </label>
+
+  <div class="form-group">
+      <input formControlName="input"
+       type="text" id="input"
+       class="form-control mb-2"
+       placeholder="Email address or phone number"
+       [ngClass]="{
+        'is-invalid':
+          loginForm.get('input').errors && loginForm.get('input').touched
+      }">
+      <div class="invalid-feedback"
+       *ngIf="loginForm.get('input').hasError('required') &&
+       loginForm.get('input').touched">
+       Field is required
+      </div>
+      <div class="invalid-feedback"
+           *ngIf="loginForm.get('input').hasError('pattern') &&
+           loginForm.get('input').touched">
+           Please enter valid email address or phone number
+      </div>
+  </div>
+  
+
+  <label for="inputPassword" class="sr-only">
+    Password
+  </label>
+
+  <div class="form-group">
+    <input id="inputPassword"
+           type="password"
+           class="form-control"
+           [ngClass]="{
+             'is-invalid':
+             loginForm.get('password').errors &&
+             loginForm.get('password').touched
+           }"
+           formControlName="password"
+           placeholder="Password" />
+    <div class="invalid-feedback"
+         *ngIf="loginForm.get('password').hasError('required') &&
+         loginForm.get('password').touched">
+         Password is required
+    </div>
+    <div class="invalid-feedback"
+         *ngIf="
+         loginForm.get('password').hasError('minlength') &&
+         loginForm.get('password').touched">
+         Password must be at least 6 characters
+    </div>
+    <div class="invalid-feedback"
+         *ngIf="
+         loginForm.get('password').hasError('maxlength') &&
+         loginForm.get('password').touched">
+         Password cannot exceed 12 characters
+    </div>
+  </div>
+
+  <button class="btn btn-lg btn-success btn-block" [disabled]="!loginForm.valid" type="submit">Sign In</button>
+  <button class="btn btn-lg btn-primary btn-block" (click)="cancel()" type="submit">Cancel</button>
+</form>
+<app-spinner [isRunning]="isRequesting"></app-spinner>

@@ -1,0 +1,32 @@
+<<<<<<< HEAD
+=======
+<!-- <header>
+  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+    <div class="d-flex justify-content-between container">
+        <h5 class="my-0 mr-md-auto font-weight-normal">
+            <li class="nav-item" routerLinkActive="active">
+                <a [routerLink]="['/']">Job Hunter</a>
+            </li>
+        </h5>
+        <nav class="d-flex my-2 my-md-0 mr-md-3">
+          <li *ngIf="!loggedIn()" class="nav-item" routerLinkActive="active">
+            <a class="btn btn-outline-success mr-2" [routerLink]="['/sign-in']">Sing In</a>
+          </li>
+          <li *ngIf="loggedIn()" class="nav-item mr-3">
+              <a class="btn btn-outline-success" [routerLink]="['/profile']">Profile</a>
+            </li>
+          <li *ngIf="!loggedInFB() && !loggedIn()" class="nav-item mr-3">
+            <button class="btn btn-primary ml-3" (click)="signInWithFB()"><i class="fa fa-facebook"></i> Sign In with facebook</button>
+          </li>
+          <li *ngIf="loggedIn()" class="nav-item mr-3">Welcome {{authService.decodedToken.unique_name}}</li>
+          <li *ngIf="!loggedInFB() && loggedIn()" class="nav-item">
+            <a class="btn btn-outline-danger" (click)="logOut()">Sign Out</a>
+          </li>
+          <li *ngIf="loggedInFB()" class="nav-item">
+            <a class="btn btn-outline-danger" (click)="singOutFacebook()">Sign Out FB</a>
+          </li>
+        </nav>
+    </div>
+  </div>
+</header> -->
+>>>>>>> 4e37aca68ac2ced53f960f1495477d7ea4d80747
