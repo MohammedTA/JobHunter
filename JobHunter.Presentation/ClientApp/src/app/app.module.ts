@@ -16,6 +16,7 @@ import { RouterModule } from '@angular/router';
 import { appRoutes } from './route.routing';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { HomeComponent } from './components/home/home.component';
+
 import { FooterComponent } from './components/Layout/footer/footer.component';
 import { HotVacanciesComponent } from './components/hot-vacancies/hot-vacancies.component';
 import { CompaniesListComponent } from './components/home/companies-list/companies-list.component';
@@ -48,7 +49,9 @@ export function tokenGetter() {
     ProfileComponent,
     LoginComponent,
     SpinnerComponent,
-    HeaderComponent
+    HeaderComponent,
+    EmployerProfileComponent,
+    VacancyListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
