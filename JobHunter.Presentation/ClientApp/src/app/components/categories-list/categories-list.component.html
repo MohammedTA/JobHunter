@@ -1,6 +1,4 @@
 <h2>Сategories list:</h2>
-
-
 <body>
   <div>
     <div class="row">
@@ -16,7 +14,7 @@
   <div class="wrap">
       <ul class="categories-list">
           <li *ngFor="let category of categories">
-            <a href="/jobs-{{ category.name }}">{{ category.name }}</a>
+            <a href="/jobs-{{ category.name }}-{{category.id}}">{{ category.name }}</a>
           </li>
       </ul>
   </div>

@@ -27,7 +27,6 @@
   <ItemGroup>
     <None Remove="ClientApp\src\app\interfaces\categoryListInterfaces.ts" />
     <None Remove="ClientApp\src\app\models\category.ts" />
-    <None Remove="ClientApp\src\app\models\CategoryList.ts" />
     <None Remove="ClientApp\src\app\models\mock-categories.ts" />
   </ItemGroup>
 
@@ -45,7 +44,6 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\categoryListInterfaces.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\category.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\models\CategoryList.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\mock-categories.ts" />
   </ItemGroup>
 
