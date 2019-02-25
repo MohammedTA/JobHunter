@@ -1,4 +1,6 @@
 using JobHunter.Data;
+using JobHunter.Data.Intefaces;
+using JobHunter.Data.Repository;
 using JobHunter.Domain.Interfaces;
 using JobHunter.Domain.Services;
 using Microsoft.AspNetCore.Builder;
@@ -38,6 +40,8 @@ namespace JobHunter.Presentation
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+            services.AddScoped<DbContext, ApplicationContext>();
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IVacancyService, VacancyService>();
 
         }

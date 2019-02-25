@@ -1,0 +1,120 @@
+<div class="form-group">
+  <h3>Gender</h3>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="male" id="defaultCheck1" [(ngModel)]="filters.gender.male"
+      name="male">
+    <label class="form-check-label" for="defaultCheck1">
+      Male
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="female" id="defaultCheck2" [(ngModel)]="filters.gender.female"
+      name="female">
+    <label class="form-check-label" for="defaultCheck2">
+      Female
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="transgender" id="defaultCheck3" [(ngModel)]="filters.gender.transgender"
+      name="transgender">
+    <label class="form-check-label" for="defaultCheck3">
+      Other
+    </label>
+  </div>
+  <hr>
+</div>
+<div class="form-group">
+  <h3>Language</h3>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="without" id="without" [(ngModel)]="filters.language.without"
+      name=" without">
+    <label class="form-check-label" for=" without">
+      without
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="beginer" id="beginer" [(ngModel)]="filters.language.beginer"
+      name="beginer">
+    <label class="form-check-label" for="beginer">
+      beginer
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="elementary" id="elementary" [(ngModel)]="filters.language.elementary"
+      name="elementary">
+    <label class="form-check-label" for="elementary">
+      elementary
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="intermediate" id="intermediate" [(ngModel)]="filters.language.intermediate"
+      name="intermediate">
+    <label class="form-check-label" for="intermediate">
+      intermediate
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="advanced" id="advanced" [(ngModel)]="filters.language.advanced"
+      name="advanced">
+    <label class="form-check-label" for="advanced">
+      advanced
+    </label>
+  </div>
+  <hr>
+</div>
+<div class="form-group" *ngIf=filterEndPoints>
+  <h3>Experience</h3>
+  <select class="form-control" id="experience" [(ngModel)]="filters.experience" name="experience">
+    <option  *ngFor="let option of filterEndPoints.experience">{{option}}</option>
+  </select>
+  <hr>
+</div>
+<div class="form-group">
+  <h3>Accommodation</h3>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="without" id="accomodation1" [(ngModel)]="filters.accomodation.without"
+      name="without">
+    <label class="form-check-label" for="accomodation1">
+      without
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="free" id="accomodation2" [(ngModel)]="filters.accomodation.free"
+      name="free">
+    <label class="form-check-label" for="accomodation2">
+      free
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="paid" id="accomodation3" [(ngModel)]="filters.accomodation.paid"
+      name="paid">
+    <label class="form-check-label" for="accomodation3">
+      paid
+    </label>
+  </div>
+  <hr>
+</div>
+<div class="form-group" *ngIf=filterEndPoints>
+  <h3>Vacancy cost</h3>
+  <input  type="range" class="custom-range" id="vacancycost" min="{{filterEndPoints.salaryMinValue}}" max="{{filterEndPoints.salaryMaxValue}}" step="100" [(ngModel)]="filters.vacancyCost"
+    name="vacancyCost">
+  <label>value: {{filters.vacancyCost}} $</label>
+  <hr>
+</div>
+<div class="form-group">
+  <h3>Visa</h3>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="On" id="visaOn" [(ngModel)]="filters.visa.on" name="visaOn">
+    <label class="form-check-label" for="visaOn">
+      On
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="Off" id="visaOff" [(ngModel)]="filters.visa.off"
+      name="visaOff">
+    <label class="form-check-label" for="visaOf">
+      Off
+    </label>
+  </div>
+  <hr>
+</div>

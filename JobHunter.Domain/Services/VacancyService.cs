@@ -6,400 +6,46 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using JobHunter.Data;
+using JobHunter.Data.Intefaces;
+using JobHunter.Data.Entities;
+using JobHunter.Domain.Enums;
 
 namespace JobHunter.Domain.Services
 {
     public class VacancyService : IVacancyService
     {
+        enum VacancyStatus {HOT, VIP}
+        private readonly IRepository<Vacancy> _context;
+        // private readonly ApplicationContext _context;
+        public VacancyService(IRepository<Vacancy> context)
+        {
+            _context = context;
+        }
         private const string BASELOGOURL = "https://localhost:44365/Images/CompanyLogos/logo.png";
         private const string ABGAMESLOGOURL = "https://localhost:44365/Images/CompanyLogos/ABGameslogo.png";
-        private static readonly VacancyListModel[] vacancies = new VacancyListModel[]
-        {
-            new VacancyListModel
-            {
-                Id=1,
-                Title="FrontEnd developer",
-                Description="work with HTML5, Sass, angular7",
-                Date="13.02.2019",
-                CompanyLogo=BASELOGOURL,
-                IsHot=true,
-                IsVip=false,
-                VacancyCity="Rivne",
-                CompanyTitle="SoftServe",
-                VacancyCost="1000"
-            },
-             new VacancyListModel
-            {
-                Id=2,
-                Title="JS developer",
-                Description="the best vacancy",
-                Date="1.02.2019",
-                CompanyLogo=BASELOGOURL,
-                VacancyCity="Rivne",
-                IsHot=true,
-                IsVip=false,
-                CompanyTitle="SoftServe",
-                VacancyCost="800"
-            },
-              new VacancyListModel
-            {
-                Id=3,
-                Title="Unity3D Game developer",
-                Description="create modern apps with Unity 3D game engine",
-                Date="10.02.2019",
-                CompanyLogo=ABGAMESLOGOURL,
-                VacancyCity="Rivne",
-                IsHot=false,
-                IsVip=false,
-                CompanyTitle="AB Games"
-            },
-               new VacancyListModel
-            {
-                Id=4,
-                Title="New business manager",
-                Description="work with clients, gave them full info about products and support",
-                Date="10.02.2019",
-                CompanyLogo=BASELOGOURL,
-                IsHot=true,
-                IsVip=false,
-                VacancyCity="Lviv",
-                CompanyTitle="Bodo",
-                VacancyCost="600"
-            },
-                     new VacancyListModel
-            {
-                Id=5,
-                Title="New business manager",
-                Description="work with clients, gave them full info about products and support",
-                Date="11.02.2019",
-                CompanyLogo=BASELOGOURL,
-                IsHot=true,
-                IsVip=false,
-                VacancyCity="Lviv",
-                CompanyTitle="Bodo",
-                VacancyCost="800"
-            },
-                       new VacancyListModel
-            {
-                Id=6,
-                Title="New business manager",
-                Description="the best vacancy",
-                Date="11.01.2019",
-                CompanyLogo=BASELOGOURL,
-                VacancyCity="Kyiv",
-                IsHot=false,
-                IsVip=false,
-                CompanyTitle="Sabo"
-            },
-                    new VacancyListModel
-            {
-                Id=7,
-                Title="New business manager",
-                Description="the best vacancy",
-                Date="17.01.2019",
-                CompanyLogo=BASELOGOURL,
-                VacancyCity="Kyiv",
-                IsHot=false,
-                IsVip=false,
-                CompanyTitle="Sabo"
-            },
-                     new VacancyListModel
-            {
-                Id=8,
-                Title="FrontEnd developer",
-                Description="work with HTML5, Sass, ReactJs",
-                Date="17.02.2019",
-                CompanyLogo=BASELOGOURL,
-                IsHot=true,
-                IsVip=false,
-                VacancyCity="Kyiv",
-                CompanyTitle="SoftServe",
-                VacancyCost="1700"
-            },
-             new VacancyListModel
-            {
-                Id=9,
-                Title="JS developer",
-                Description="the best vacancy",
-                Date="1.02.2019",
-                CompanyLogo=BASELOGOURL,
-                VacancyCity="Rivne",
-                IsHot=true,
-                IsVip=false,
-                CompanyTitle="SoftServe",
-                VacancyCost="800"
-            },
-              new VacancyListModel
-            {
-                Id=10,
-                Title="Unity3D Game developer",
-                Description="create modern apps with Unity 3D game engine",
-                Date="10.02.2019",
-                CompanyLogo=ABGAMESLOGOURL,
-                VacancyCity="Kyiv",
-                IsHot=false,
-                IsVip=false,
-                CompanyTitle="AB Games"
-            },
-               new VacancyListModel
-            {
-                Id=11,
-                Title="New business manager",
-                Description="the best vacancy",
-                Date="10.02.2019",
-                CompanyLogo=BASELOGOURL,
-                IsHot=true,
-                IsVip=false,
-                VacancyCity="Kyiv",
-                CompanyTitle="Bodo",
-                VacancyCost="600"
-            },
-                     new VacancyListModel
-            {
-                Id=12,
-                Title="New business manager",
-                Description="the best vacancy",
-                Date="10.01.2019",
-                CompanyLogo=BASELOGOURL,
-                VacancyCity="Kyiv",
-                 IsHot=false,
-                IsVip=false,
-                CompanyTitle="Bodo",
-                VacancyCost="500"
-            },
-                       new VacancyListModel
-            {
-                Id=13,
-                Title="New business manager",
-                Description="the best vacancy",
-                Date="11.01.2019",
-                CompanyLogo=BASELOGOURL,
-                VacancyCity="Kyiv",
-                IsHot=false,
-                IsVip=false,
-                CompanyTitle="Sabo"
-            },
-                    new VacancyListModel
-            {
-                Id=14,
-                Title="New business manager",
-                Description="the best vacancy",
-                Date="17.01.2019",
-                CompanyLogo=BASELOGOURL,
-                VacancyCity="Kyiv",
-                IsHot=false,
-                IsVip=false,
-                CompanyTitle="Sabo"
-            },
-                     new VacancyListModel
-            {
-                Id=15,
-                Title="FrontEnd developer",
-                Description="work with HTML5, Sass, angular7",
-                Date="13.02.2019",
-                CompanyLogo=BASELOGOURL,
-                IsHot=true,
-                IsVip=false,
-                VacancyCity="Lviv",
-                CompanyTitle="SoftServe",
-                VacancyCost="1000"
-            },
-             new VacancyListModel
-            {
-                Id=16,
-                Title="JS developer",
-                Description="create modern apps with rich interface and animation",
-                Date="1.02.2019",
-                CompanyLogo=BASELOGOURL,
-                VacancyCity="Rivne",
-                IsHot=true,
-                IsVip=false,
-                CompanyTitle="SoftServe",
-                VacancyCost="800"
-            },
-              new VacancyListModel
-            {
-                Id=17,
-                Title="Unity3D Game developer",
-                Description="the best vacancy",
-                Date="15.02.2019",
-                CompanyLogo=ABGAMESLOGOURL,
-                VacancyCity="Kyiv",
-                IsHot=false,
-                IsVip=false,
-                CompanyTitle="AB Games"
-            },
-               new VacancyListModel
-            {
-                Id=18,
-                Title="New business manager",
-                Description="the best vacancy",
-                Date="10.02.2019",
-                CompanyLogo=BASELOGOURL,
-                IsHot=true,
-                IsVip=false,
-                VacancyCity="Kyiv",
-                CompanyTitle="Bodo",
-                VacancyCost="600"
-            },
-                     new VacancyListModel
-            {
-                Id=19,
-                Title="New business manager",
-                Description="the best vacancy",
-                Date="10.01.2019",
-                CompanyLogo=BASELOGOURL,
-                VacancyCity="Kyiv",
-                 IsHot=false,
-                IsVip=false,
-                CompanyTitle="Bodo",
-                VacancyCost="500"
-            },
-                       new VacancyListModel
-            {
-                Id=20,
-                Title="New business manager",
-                Description="the best vacancy",
-                Date="11.01.2019",
-                CompanyLogo=BASELOGOURL,
-                VacancyCity="Kyiv",
-                IsHot=false,
-                IsVip=false,
-                CompanyTitle="Sabo"
-            },
-                    new VacancyListModel
-            {
-                Id=21,
-                Title="New business manager",
-                Description="the best vacancy",
-                Date="17.01.2019",
-                CompanyLogo=BASELOGOURL,
-                VacancyCity="Kyiv",
-                IsHot=false,
-                IsVip=false,
-                CompanyTitle="Sabo"
-            },
-                     new VacancyListModel
-            {
-                Id=22,
-                Title=".NET developer",
-                Description="the best vacancy",
-                Date="11.02.2019",
-                CompanyLogo=BASELOGOURL,
-                IsHot=true,
-                IsVip=false,
-                VacancyCity="Rivne",
-                CompanyTitle="SoftServe",
-                VacancyCost="1200"
-            },
-             new VacancyListModel
-            {
-                Id=23,
-                Title="JS developer",
-                Description="the best vacancy",
-                Date="1.02.2019",
-                CompanyLogo=BASELOGOURL,
-                VacancyCity="Rivne",
-                IsHot=true,
-                IsVip=false,
-                CompanyTitle="SoftServe",
-                VacancyCost="800"
-            },
-              new VacancyListModel
-            {
-                Id=24,
-                Title="Unity3D Game developer",
-                Description="the best vacancy",
-                Date="10.02.2019",
-                CompanyLogo=ABGAMESLOGOURL,
-                VacancyCity="Lviv",
-                IsHot=false,
-                IsVip=false,
-                CompanyTitle="AB Games"
-            },
-               new VacancyListModel
-            {
-                Id=25,
-                Title="New business manager",
-                Description="the best vacancy",
-                Date="10.02.2019",
-                CompanyLogo=BASELOGOURL,
-                IsHot=true,
-                IsVip=false,
-                VacancyCity="Kyiv",
-                CompanyTitle="Bodo",
-                VacancyCost="600"
-            },
-                     new VacancyListModel
-            {
-                Id=26,
-                Title="New business manager",
-                Description="the best vacancy",
-                Date="10.01.2019",
-                CompanyLogo=BASELOGOURL,
-                VacancyCity="Lviv",
-                 IsHot=false,
-                IsVip=false,
-                CompanyTitle="Bodo",
-                VacancyCost="500"
-            },
-                       new VacancyListModel
-            {
-                Id=27,
-                Title="New business manager",
-                Description="the best vacancy",
-                Date="11.01.2019",
-                CompanyLogo=BASELOGOURL,
-                VacancyCity="Kyiv",
-                IsHot=false,
-                IsVip=false,
-                CompanyTitle="Sabo"
-            },
-                    new VacancyListModel
-            {
-                Id=28,
-                Title="New business manager",
-                Description="the best vacancy",
-                Date="17.01.2019",
-                CompanyLogo=BASELOGOURL,
-                VacancyCity="Lviv",
-                IsHot=false,
-                IsVip=false,
-                CompanyTitle="Sabo"
-            },
-        };
-
-        public PaginationOutPutModel<VacancyListModel> GetPaginationOutputList(PaginationParamsModel paginationModel)
-        {
-            var amount = vacancies.Count();
-            var pageinfo = new Helpers.PageInfo
-            {
-                CurrentPage = paginationModel.CurrentPage,
-                ItemsPerPage = paginationModel.PageSize,
-                TotalItems = amount
-            };
-            var result=vacancies.OrderBy(p => p.Id).Skip((paginationModel.CurrentPage - 1) * paginationModel.PageSize)
-                .Take(paginationModel.PageSize).OrderByDescending(x=>x.IsHot);
-            var paginatedmodel = new PaginationOutPutModel<VacancyListModel>()
-            {
-                PageInfo = pageinfo,
-                PaginatedList = result.ToList()
-            };
-            return paginatedmodel;
-        }
-
         public PaginationOutPutModel<VacancyListModel> GetVacancies(FilterModel filterModel)
         {
-            var query = vacancies.AsQueryable();
-            if(!string.IsNullOrEmpty(filterModel.Query))
+            var query = _context.Get().Where(x => x.AgreementSpam && x.CreationDate < DateTime.Now && x.ExpirationDate > DateTime.Now);
+            if (!string.IsNullOrEmpty(filterModel.Query))
             {
-                query = vacancies.Where(x => x.Title.ToUpper().Contains(filterModel.Query.ToUpper()) || 
-                x.Description.ToUpper().Contains(filterModel.Query.ToUpper()))
-                    .OrderBy(x=>x.IsHot).AsQueryable();
+                query = query.Where(x => x.Name.ToUpper().Contains(filterModel.Query.ToUpper()) ||
+                x.Description.ToUpper().Contains(filterModel.Query.ToUpper()));
             }
             if (!string.IsNullOrEmpty(filterModel.City))
             {
-                query = query.Where(x => x.VacancyCity.ToUpper().Contains(filterModel.City.ToUpper())).OrderBy(x => x.IsHot).AsQueryable();
+                query = query.Where(x => x.Employer.City.Name.ToUpper().Contains(filterModel.City.ToUpper()));
+            }
+            if (filterModel.VacancyCost != 0M)
+            {
+                query = query.Where(x => x.Salary >= filterModel.VacancyCost);
+            }
+            if (filterModel.Visa.On)
+            {
+                query = query.Where(x => x.Visa);
+            }
+            else if (filterModel.Visa.Off)
+            {
+                query = query.Where(x => x.Visa==false);
             }
             var amount = query.Count();
             var pageinfo = new Helpers.PageInfo
@@ -408,13 +54,36 @@ namespace JobHunter.Domain.Services
                 TotalItems = amount
             };
             query = query.OrderBy(p => p.Id).Skip((filterModel.CurrentPage - 1) * pageinfo.ItemsPerPage)
-                .Take(pageinfo.ItemsPerPage).OrderByDescending(x => x.IsHot);
+                .Take(pageinfo.ItemsPerPage);
+            var result = query.Select(x => new VacancyListModel
+            {
+                Id = x.Id,
+                Title = x.Name,
+                Description = x.Description,
+                CompanyLogo = x.Employer.LogoURL == null ? BASELOGOURL : x.Employer.LogoURL,
+                CompanyTitle = x.Employer.CompanyName,
+                Date = x.CreationDate.ToShortDateString(),
+                IsHot = x.VacancyStatuses.Select(s => s.Status.Name).Contains(VacancyStatus.HOT.ToString()),
+                IsVip = x.VacancyStatuses.Select(s => s.Status.Name).Contains(VacancyStatus.VIP.ToString()),
+                VacancyCity = x.Employer.City.Name,
+                VacancyCost = x.Salary
+            });
             var paginatedmodel = new PaginationOutPutModel<VacancyListModel>()
             {
                 PageInfo = pageinfo,
-                PaginatedList =query.ToList()
+                PaginatedList = result.ToList()
             };
             return paginatedmodel;
-        }  
+        }
+
+        public FilterEndPointsModel GetFilterEndPointsModel()
+        {
+            FilterEndPointsModel result = new FilterEndPointsModel
+            {
+                Experience = Enum.GetNames(typeof(FilterEnums.Experiance)),
+                SalaryMaxValue = _context.Get().Max(x=>x.Salary)
+            };
+            return result;
+        }
     }
 }

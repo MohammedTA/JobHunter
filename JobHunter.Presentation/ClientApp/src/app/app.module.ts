@@ -10,6 +10,8 @@ import { HomeComponent } from './components/home/home.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { FetchDataComponent } from './components/fetch-data/fetch-data.component';
 import { VacancyListComponent } from './components/vacancy-list/vacancy-list.component';
+import { FilterComponentComponent } from './components/filter-component/filter-component.component';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { VacancyListComponent } from './components/vacancy-list/vacancy-list.com
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    VacancyListComponent
+    VacancyListComponent,
+    FilterComponentComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

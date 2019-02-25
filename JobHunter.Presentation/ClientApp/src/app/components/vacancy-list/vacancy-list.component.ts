@@ -40,7 +40,7 @@ export class VacancyListComponent implements OnInit {
   private onSearchClick = () => {
     this.searchParams = Object.assign({}, this.filters);
     this.searchParams.currentPage = this.DEFAULT_PAGE;
-    this.vacancyservice.getVacancies(this.searchParams).subscribe(result => {
+    this.vacancyservice.getVacanciesList(this.searchParams).subscribe(result => {
       this.paginatedVacancyList = result;
       this.setPageHelper(this.paginatedVacancyList.pageInfo);
     }, error => console.error(error));

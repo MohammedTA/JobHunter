@@ -58,3 +58,9 @@ export interface PageModel {
   currentPage: number;
   pageSize: number;
 }
+
+export interface FilterEndPoints {
+  experience: string[];
+  salaryMinValue: number;
+  salaryMaxValue: number;
+}

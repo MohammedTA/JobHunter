@@ -26,14 +26,19 @@ namespace JobHunter.Data.Repository
 
         public virtual IEnumerable<T> Get()
         {
-            return _set.AsEnumerable();
+            // return _set.AsEnumerable();
+            return _set.AsQueryable();
         }
 
         public virtual IEnumerable<T> Get(Expression<Func<T, bool>> predicate)
         {
+            //return _set
+            //       .Where(predicate)
+            //       .AsEnumerable();
             return _set
                    .Where(predicate)
-                   .AsEnumerable();
+                   .AsQueryable();
+   
         }
 
         public void Add(T entity)

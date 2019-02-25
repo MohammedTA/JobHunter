@@ -8,7 +8,7 @@
         public Language Language { get; set; }
         public string Experience { get; set; }
         public Accommodation Accommodation { get; set; }
-        public double VacancyCost { get; set; }
+        public decimal VacancyCost { get; set; }
         public Visa Visa { get; set; }
         public int CurrentPage { get; set; }
 

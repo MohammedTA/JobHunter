@@ -22,15 +22,22 @@ div .details-wrapper{
     display: flex;
     justify-content: space-between;
 }
-
-div .vacancy-hot{
+.header-wrapper{
+  display: flex;
+}
+ .vacancy-hot{
     background-color:goldenrod;
     border-radius: 15%;
     padding: 5px;
 }
+ .vacancy-vip{
+  background-color:gold;
+  border-radius: 15%;
+  padding: 5px;
+}
 
 .cost{
-  margin-left:20px;
+  margin-left:auto;
 }
   .cost::after {
     content: "$";

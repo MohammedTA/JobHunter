@@ -11,7 +11,7 @@
         public bool IsVip { get; set; }
         public string VacancyCity { get; set; }
         public string CompanyTitle { get; set; }
-        public string VacancyCost { get; set; }
+        public decimal VacancyCost { get; set; }
 
     }
 }

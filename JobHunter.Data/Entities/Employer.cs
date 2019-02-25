@@ -22,7 +22,7 @@ namespace JobHunter.Data.Entities
         public int? CityId { get; set; }
         public int? OrganisationCredentialId { get; set; }
         [ForeignKey("User")]
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
         public virtual User User { get; set; }
         public virtual OrganisationCredentials OrganisationCredentials { get; set; }
         public virtual City City {get;set;}

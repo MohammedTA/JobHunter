@@ -8,6 +8,6 @@ namespace JobHunter.Domain.Interfaces
     public interface IVacancyService
     {
         PaginationOutPutModel<VacancyListModel> GetVacancies(FilterModel filterModel);
-        PaginationOutPutModel<VacancyListModel> GetPaginationOutputList(PaginationParamsModel paginationModel);
+        FilterEndPointsModel GetFilterEndPointsModel();
     }
 }

@@ -69,12 +69,15 @@ namespace JobHunter.Data
 
             //Initial Data Configurations
             builder.ApplyConfiguration(new CountryInitConfig());
+            builder.ApplyConfiguration(new CityInitialConfig());
+            builder.ApplyConfiguration(new EmployerInitialConfig());
+            builder.ApplyConfiguration(new CategoryInitConfig());
             builder.ApplyConfiguration(new RoleInitConfig());
             builder.ApplyConfiguration(new VacancyInitialConfig());
             builder.ApplyConfiguration(new LanguageInitialConfig());
            // builder.ApplyConfiguration(new CountryInitialConfig());
             builder.ApplyConfiguration(new StatusInitialConfig());
-            builder.ApplyConfiguration(new CategoryInitConfig());
+            builder.ApplyConfiguration(new VacancyStatusInitialConfig());
 
             //
             builder.Entity<Profile>().HasOne(x => x.User).WithOne(y => y.Profile);

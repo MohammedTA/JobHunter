@@ -23,7 +23,7 @@ namespace JobHunter.Presentation.Controllers.API
 
         }
         [HttpPost("[action]")]
-        public IActionResult GetVacancies([FromBody] FilterModel filters)
+        public IActionResult GetVacancies ([FromBody] FilterModel filters)
         {
             if(!ModelState.IsValid)
             {
@@ -32,9 +32,9 @@ namespace JobHunter.Presentation.Controllers.API
             return Ok(_vacancyService.GetVacancies(filters));
         }
         [HttpGet("[action]")]
-        public IActionResult GetVacanciesList([FromQuery]PaginationParamsModel paginationModel)
+        public IActionResult GetFilterEndPoints()
         {
-            return Ok(_vacancyService.GetPaginationOutputList(paginationModel));
+            return Ok(_vacancyService.GetFilterEndPointsModel());
         }
 
     }

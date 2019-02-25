@@ -1,4 +1,4 @@
-import { FilterModel } from '../interfaces/vacancyListInterfaces';
+import { FilterModel, FilterEndPoints } from '../interfaces/vacancyListInterfaces';
 
 
 export const filterModel: FilterModel =  {
@@ -28,4 +28,10 @@ export const filterModel: FilterModel =  {
       off: false
   },
   currentPage: 1,
+};
+
+export const filterEndPoints: FilterEndPoints = {
+  experience: [],
+  salaryMinValue: 0,
+  salaryMaxValue: 0
 };
