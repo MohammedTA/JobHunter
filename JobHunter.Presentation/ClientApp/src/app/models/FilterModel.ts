@@ -3,11 +3,12 @@ import { FilterModel, FilterEndPoints } from '../interfaces/vacancyListInterface
 
 export const filterModel: FilterModel =  {
     query: '',
-    city: '',
+  city: '',
+  categories:[],
     gender: {
       male: false,
       female: false,
-      transgender: false
+      other: false
     },
     language: {
       without: false,
@@ -31,6 +32,7 @@ export const filterModel: FilterModel =  {
 };
 
 export const filterEndPoints: FilterEndPoints = {
+  categories:[],
   experience: [],
   salaryMinValue: 0,
   salaryMaxValue: 0

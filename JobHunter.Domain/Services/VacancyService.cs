@@ -16,10 +16,12 @@ namespace JobHunter.Domain.Services
     {
         enum VacancyStatus {HOT, VIP}
         private readonly IRepository<Vacancy> _context;
+        private readonly IRepository<Category> _contextcategory;
         // private readonly ApplicationContext _context;
-        public VacancyService(IRepository<Vacancy> context)
+        public VacancyService(IRepository<Vacancy> context, IRepository<Category> categorycontext)
         {
             _context = context;
+            _contextcategory = categorycontext;
         }
         private const string BASELOGOURL = "https://localhost:44365/Images/CompanyLogos/logo.png";
         private const string ABGAMESLOGOURL = "https://localhost:44365/Images/CompanyLogos/ABGameslogo.png";
@@ -46,6 +48,18 @@ namespace JobHunter.Domain.Services
             else if (filterModel.Visa.Off)
             {
                 query = query.Where(x => x.Visa==false);
+            }
+            if (filterModel.Gender.Male)
+            {
+                query = query.Where(x => x.Gender == 1);
+            }
+            if (filterModel.Gender.Female)
+            {
+                query = query.Where(x => x.Gender == 2);
+            }
+            if (filterModel.Gender.Other)
+            {
+                query = query.Where(x => x.Gender == 0);
             }
             var amount = query.Count();
             var pageinfo = new Helpers.PageInfo
@@ -80,7 +94,8 @@ namespace JobHunter.Domain.Services
         {
             FilterEndPointsModel result = new FilterEndPointsModel
             {
-                Experience = Enum.GetNames(typeof(FilterEnums.Experiance)),
+                Categories=_contextcategory.Get().Select(x=>x.Name).ToList(),
+                Experience = Enum.GetNames(typeof(FilterEnums.Experiance)).ToList(),
                 SalaryMaxValue = _context.Get().Max(x=>x.Salary)
             };
             return result;

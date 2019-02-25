@@ -15,8 +15,11 @@ export class FilterComponentComponent implements OnInit {
 
   ngOnInit() {
     if (!this.filterEndPoints) {
-    this.vacancyservice.getFilterEndPoints().subscribe(result => {this.filterEndPoints = result;  console.log(this.filterEndPoints); },
-      error => console.log(error)
+      this.vacancyservice.getFilterEndPoints().subscribe(result => {
+      this.filterEndPoints = result; console.log(this.filterEndPoints);
+        this.filters.categories = result.categories.map(x => { return {categoryName:x, isSelected:false}})
+      },
+        error => console.log(error)
       );
     }
   }

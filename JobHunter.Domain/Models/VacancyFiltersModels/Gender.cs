@@ -4,7 +4,7 @@
     {
         public bool Male { get; set; }
         public bool Female { get; set; }
-        public bool Transgender { get; set; }
+        public bool Other { get; set; }
 
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace JobHunter.Domain.Models.VacancyFiltersModels
+﻿using System.Collections.Generic;
+
+namespace JobHunter.Domain.Models.VacancyFiltersModels
 {
     public class FilterModel
     {
@@ -11,6 +13,13 @@
         public decimal VacancyCost { get; set; }
         public Visa Visa { get; set; }
         public int CurrentPage { get; set; }
+        public List <CategorySelected> Categories{ get; set; }
 
+    }
+
+    public class CategorySelected
+    {
+        public string CategoryName { get; set; }
+        public bool IsSelected { get; set; }
     }
 }
