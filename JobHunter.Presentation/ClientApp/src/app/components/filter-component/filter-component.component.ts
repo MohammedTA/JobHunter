@@ -17,7 +17,8 @@ export class FilterComponentComponent implements OnInit {
     if (!this.filterEndPoints) {
       this.vacancyservice.getFilterEndPoints().subscribe(result => {
       this.filterEndPoints = result; console.log(this.filterEndPoints);
-        this.filters.categories = result.categories.map(x => { return {categoryName:x, isSelected:false}})
+        this.filters.categories = result.categories.map(x => ({categoryName: x, isSelected: false}));
+        this.filters.languageLevels = result.languageLevels.map(x => ({languageLevelName: x, isSelected: false}));
       },
         error => console.log(error)
       );

@@ -15,6 +15,10 @@ export interface FilterModel {
     categoryName: string,
     isSelected: boolean
   }>;
+  languageLevels: Array<{
+    languageLevelName: string,
+    isSelected: boolean
+  }>;
   query: string;
   city: string;
   vacancyCost: number;
@@ -63,6 +67,7 @@ export interface PageModel {
   pageSize: number;
 }
 export interface FilterEndPoints {
+  languageLevels: string[];
   categories: string[];
   experience: string[];
   salaryMinValue: number;

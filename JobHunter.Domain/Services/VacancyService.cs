@@ -15,6 +15,7 @@ namespace JobHunter.Domain.Services
     public class VacancyService : IVacancyService
     {
         enum VacancyStatus {HOT, VIP}
+        int[] test = { 0, 1, 2 };
         private readonly IRepository<Vacancy> _context;
         private readonly IRepository<Category> _contextcategory;
         // private readonly ApplicationContext _context;
@@ -27,7 +28,7 @@ namespace JobHunter.Domain.Services
         private const string ABGAMESLOGOURL = "https://localhost:44365/Images/CompanyLogos/ABGameslogo.png";
         public PaginationOutPutModel<VacancyListModel> GetVacancies(FilterModel filterModel)
         {
-            var query = _context.Get().Where(x => x.AgreementSpam && x.CreationDate < DateTime.Now && x.ExpirationDate > DateTime.Now);
+            var query = _context.GetQueryable().Where(x => x.AgreementSpam && x.CreationDate < DateTime.Now && x.ExpirationDate > DateTime.Now);
             if (!string.IsNullOrEmpty(filterModel.Query))
             {
                 query = query.Where(x => x.Name.ToUpper().Contains(filterModel.Query.ToUpper()) ||
@@ -49,17 +50,21 @@ namespace JobHunter.Domain.Services
             {
                 query = query.Where(x => x.Visa==false);
             }
+            if(filterModel.Categories.Where(c=>c.IsSelected).Count()>0)
+            {
+                query=query.Where(x=>filterModel.Categories.Select(c=>c.CategoryName).Contains(x.Category.Name));
+            }
             if (filterModel.Gender.Male)
             {
-                query = query.Where(x => x.Gender == 1);
+                query = query.Where(x=>test.Contains(x.Gender));
             }
             if (filterModel.Gender.Female)
             {
-                query = query.Where(x => x.Gender == 2);
+                query = query.Where(x => test.Contains(x.Gender));
             }
             if (filterModel.Gender.Other)
             {
-                query = query.Where(x => x.Gender == 0);
+                query = query.Where(x => test.Contains(x.Gender));
             }
             var amount = query.Count();
             var pageinfo = new Helpers.PageInfo
@@ -94,6 +99,7 @@ namespace JobHunter.Domain.Services
         {
             FilterEndPointsModel result = new FilterEndPointsModel
             {
+                LanguageLevels=Enum.GetNames(typeof(FilterEnums.LanguageLevel)).ToList(),
                 Categories=_contextcategory.Get().Select(x=>x.Name).ToList(),
                 Experience = Enum.GetNames(typeof(FilterEnums.Experiance)).ToList(),
                 SalaryMaxValue = _context.Get().Max(x=>x.Salary)

@@ -15,7 +15,7 @@ export class VacancyListComponent implements OnInit {
   paginatedVacancyList: PaginatedVacancyList;
   filters: FilterModel = Object.assign({}, filterModel);
   searchParams: FilterModel = Object.assign({}, filterModel);
-  isFiltersVisible = false;
+  isFiltersVisible = true;
   pageHelper: any = {};
   private paginationservice: PaginationService = new PaginationService();
 
@@ -34,12 +34,11 @@ export class VacancyListComponent implements OnInit {
       this.setPageHelper(this.paginatedVacancyList.pageInfo);
     }, error => console.error(error));
   }
-  private ToggleFiltersVisibility() {
-    this.isFiltersVisible = !this.isFiltersVisible;
-  }
   private onSearchClick = () => {
     this.searchParams = Object.assign({}, this.filters);
     this.searchParams.currentPage = this.DEFAULT_PAGE;
+    this.searchParams.categories = this.searchParams.categories.filter(function (x) { return x.isSelected === true; });
+    this.searchParams.languageLevels = this.searchParams.languageLevels.filter(function (x) { return x.isSelected === true; });
     this.vacancyservice.getVacanciesList(this.searchParams).subscribe(result => {
       this.paginatedVacancyList = result;
       this.setPageHelper(this.paginatedVacancyList.pageInfo);
